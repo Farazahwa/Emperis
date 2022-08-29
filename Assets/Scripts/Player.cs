@@ -10,15 +10,18 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private float _movement;
     private bool _grounded = true;
+    private Animator _animator;
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
         var move = _movement * _speed;
+        _animator.SetFloat("Move", Mathf.Abs(move));
         _rigidbody.velocity = new Vector3(move, _rigidbody.velocity.y);
     }
     
