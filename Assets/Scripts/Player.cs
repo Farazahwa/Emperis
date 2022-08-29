@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     private Rigidbody2D _rigidbody;
     private float _movement;
+    private bool _grounded = true;
 
     void Start()
     {
@@ -17,12 +18,41 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         var move = _movement * _speed;
-        _rigidbody.velocity = new Vector3(move, 0);
+        _rigidbody.velocity = new Vector3(move, _rigidbody.velocity.y);
     }
     
     void OnMove(InputValue value)
     {
         _movement = value.Get<float>();
-        Debug.Log(_movement);
+    }
+
+    void OnJump(InputValue value)
+    {
+
+        Jump();
+    }
+
+    private void Jump()
+    {
+        if (_grounded)
+        {
+            Debug.Log("Space Pressed");
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _speed);
+            _grounded = false;
+        }
+    }
+
+    private void OnCollisioncd cEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Grounded"))
+        {
+            Debug.Log("Collision");
+            _grounded = true;
+        }
+    }
+
+    public bool SetGround()
+    {
+        return _grounded;
     }
 }
