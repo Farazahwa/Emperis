@@ -21,8 +21,10 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         var move = _movement * _speed;
-        _animator.SetFloat("Move", Mathf.Abs(move));
         _rigidbody.velocity = new Vector3(move, _rigidbody.velocity.y);
+        transform.eulerAngles = new Vector3(0, 0, 0);
+
+        _animator.SetFloat("Move", Mathf.Abs(move));
     }
     
     void OnMove(InputValue value)
