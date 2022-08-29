@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _speed = 10f;
+    [SerializeField] private float _jump = 8f;
     private Rigidbody2D _rigidbody;
     private float _movement;
     private bool _grounded = true;
@@ -37,16 +38,15 @@ public class Player : MonoBehaviour
         if (_grounded)
         {
             Debug.Log("Space Pressed");
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _speed);
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jump);
             _grounded = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Grounded"))
+        if (other.gameObject.tag == "Grounded")
         {
-            Debug.Log("Collision");
             _grounded = true;
         }
     }
