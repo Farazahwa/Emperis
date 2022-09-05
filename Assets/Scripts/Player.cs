@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     {
         var move = _movement * _speed;
         _rigidbody.velocity = new Vector3(move, _rigidbody.velocity.y);
-        transform.eulerAngles = new Vector3(0, 0, 0);
 
         _animator.SetFloat("Move", Mathf.Abs(move));
     }
@@ -34,12 +33,14 @@ public class Player : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
+        
         Jump();
     }
 
     private void Jump()
     {
+        
         if (_grounded)
         {
             Debug.Log("Space Pressed");
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Grounded")
+        if (CompareTag("Grounded"))
         {
             _grounded = true;
         }

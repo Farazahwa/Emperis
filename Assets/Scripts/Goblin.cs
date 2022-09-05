@@ -15,6 +15,6 @@ public class Goblin : MonoBehaviour
     void FixedUpdate()
     {
         var x = _speed * -1;
-        _rb.velocity = new Vector3(x, 0);
+        _rb.velocity = new Vector3(x, transform.position.y);
     }
 }
