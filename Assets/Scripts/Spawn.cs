@@ -5,10 +5,22 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     [SerializeField] private GameObject _goblin;
-
+    private bool _distract;
+    private Limit _limit;
     void Start()
     {
-        StartCoroutine(SpawnGoblin());
+        _limit = new Limit();
+    }
+
+    void Update()
+    {
+        _distract = _limit.SetDistract();
+        Debug.Log(_distract);
+        
+        if (_distract)
+        {
+            StartCoroutine(SpawnGoblin());
+        }
     }
 
     IEnumerator SpawnGoblin()

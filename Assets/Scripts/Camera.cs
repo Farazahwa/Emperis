@@ -6,14 +6,12 @@ public class Camera : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     private Vector3 _offset;
-    private bool _grounded;
     private Player _playerClass;
 
     void Start()
     {
         _offset = transform.position - _player.transform.position;
         _playerClass = new Player();
-        _grounded = _playerClass.SetGround();
     }
 
     void Update()

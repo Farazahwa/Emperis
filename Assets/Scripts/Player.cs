@@ -32,13 +32,7 @@ public class Player : MonoBehaviour
     }
 
     void OnJump(InputValue value)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
-        
-        if (hit.collider.CompareTag("Grounded"))
-        { 
-            _grounded = true;
-        }
+    {   
         Jump();
     }
 
