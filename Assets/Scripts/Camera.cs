@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class Camera : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     private Vector3 _offset;
@@ -18,14 +18,9 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        _grounded = _playerClass.SetGround();
-    }
-
-    void LateUpdate()
-    {
-        if (_grounded)
-        {
-            transform.position = _player.transform.position + _offset;
-        }    
+        transform.position = new Vector3(
+            _player.transform.position.x + _offset.x,
+            transform.position.y,
+            transform.position.z);
     }
 }

@@ -35,6 +35,10 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
         
+        if (hit.collider.CompareTag("Grounded"))
+        { 
+            _grounded = true;
+        }
         Jump();
     }
 
@@ -43,15 +47,14 @@ public class Player : MonoBehaviour
         
         if (_grounded)
         {
-            Debug.Log("Space Pressed");
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jump);
             _grounded = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (CompareTag("Grounded"))
+        if (other.gameObject.CompareTag("Grounded"))
         {
             _grounded = true;
         }
