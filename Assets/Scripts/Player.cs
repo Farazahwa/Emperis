@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
-    [SerializeField] private float _jump = 8f;
+    [SerializeField] private float _jump = 10f;
     private Rigidbody2D _rigidbody;
     private float _movement;
     private bool _grounded = true;
@@ -54,6 +54,12 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Grounded"))
         {
             _grounded = true;
+        }
+
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("Collision");
+            _movement = 0;
         }
     }
 }
