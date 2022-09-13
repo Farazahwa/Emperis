@@ -5,6 +5,8 @@ using UnityEngine;
 public class Goblin : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
+    [SerializeField] private Limit _limit;
+    private bool _distract = false;
     private Rigidbody2D _rb;
     void Start()
     {
@@ -14,7 +16,14 @@ public class Goblin : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        var x = _speed * -1;
-        _rb.velocity = new Vector3(x, transform.position.y);
+        // Set distract from Limit script
+        _distract = _limit.SetDistract();
+
+        if (_distract)
+        {
+            var x = _speed * -1;
+            _rb.velocity = new Vector3(x, transform.position.y);
+            _distract = true;
+        }
     }
 }

@@ -26,19 +26,21 @@ public class Player : MonoBehaviour
         _animator.SetFloat("Move", Mathf.Abs(move));
     }
     
+    // Input System Move
     void OnMove(InputValue value)
     {
         _movement = value.Get<float>();
     }
 
+    // Input System Jump
     void OnJump(InputValue value)
     {   
         Jump();
     }
 
+    // Helper Method
     private void Jump()
     {
-        
         if (_grounded)
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jump);
@@ -46,16 +48,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Collision with other game object
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Grounded"))
         {
             _grounded = true;
         }
-    }
-
-    public bool SetGround()
-    {
-        return _grounded;
     }
 }
