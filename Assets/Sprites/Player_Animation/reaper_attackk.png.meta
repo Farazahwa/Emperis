@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3b0aa20987089e84e85d6901955811dd
+guid: 1817b55ed0df174438b13a6264afc57b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,28 +116,28 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: reaper_attack_0
+      name: reaper_attackk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 64
-      alignment: 9
-      pivot: {x: 0.4894515, y: 0.5158227}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b66c81c6fb0d7bc4ab4fb77b70aca237
-      internalID: 565434533
+      spriteID: b1d1c1ffe9bca4c458a4db137b7e08d5
+      internalID: -923623137
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: reaper_attack_1
+      name: reaper_attackk_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,20 +145,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd78a335bbd833b4588eac847be377f8
-      internalID: -1690342050
+      spriteID: 0bd4affae9d5c8141948426bfb292618
+      internalID: -780194204
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: reaper_attack_2
+      name: reaper_attackk_2
       rect:
         serializedVersion: 2
         x: 256
@@ -166,14 +166,14 @@ TextureImporter:
         width: 71
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 568f0dd075b2e0c459754605dc046b55
-      internalID: 241190818
+      spriteID: 5d3062a880411e0428769d9fc41708c8
+      internalID: -1170121705
       vertices: []
       indices: 
       edges: []
@@ -189,9 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      reaper_attack_1: -1690342050
-      reaper_attack_0: 565434533
-      reaper_attack_2: 241190818
+      reaper_attackk_2: -1170121705
+      reaper_attackk_1: -780194204
+      reaper_attackk_0: -923623137
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
