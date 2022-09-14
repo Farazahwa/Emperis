@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jump = 10f;
     private Rigidbody2D _rigidbody;
     private float _movement;
+    private bool _attack;
     private bool _grounded = true;
     private Animator _animator;
 
@@ -23,7 +24,13 @@ public class Player : MonoBehaviour
         var move = _movement * _speed;
         _rigidbody.velocity = new Vector3(move, _rigidbody.velocity.y);
 
+        _animator.SetBool("Attack", _attack);
         _animator.SetFloat("Move", Mathf.Abs(move));
+
+        if (_movement < 0)
+        {
+            transform.localScale = new Vector3();
+        }
     }
     
     // Input System Move
@@ -40,8 +47,15 @@ public class Player : MonoBehaviour
 
     void OnAttack(InputValue value)
     {
-        Debug.Log(value);
-        
+        var input = value.Get<float>();
+        if (input == 1)
+        {
+            _attack = true;
+        }
+        else
+        {
+            _attack = false;
+        }
     }
 
     // Helper Method
