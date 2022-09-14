@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 22ff0ed874b90344bbcb023566f3e8d9
+guid: 3b0aa20987089e84e85d6901955811dd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,49 +116,28 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: reaper_sword-sheet_0
+      name: reaper_attack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4894515, y: 0.5158227}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b6391689a29d0b46884624c473bf4d0
-      internalID: 387604966
+      spriteID: b66c81c6fb0d7bc4ab4fb77b70aca237
+      internalID: 565434533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: reaper_sword-sheet_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9dfc61855a3d6074bb74d161ff8e87a0
-      internalID: -1666560224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: reaper_sword-sheet_2
+      name: reaper_attack_1
       rect:
         serializedVersion: 2
         x: 128
@@ -166,35 +145,35 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27fda5eafa7b556469f2964d6cdedb43
-      internalID: 977442189
+      spriteID: fd78a335bbd833b4588eac847be377f8
+      internalID: -1690342050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: reaper_sword-sheet_3
+      name: reaper_attack_2
       rect:
         serializedVersion: 2
-        x: 192
+        x: 256
         y: 0
-        width: 64
+        width: 71
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b888e1f84fc0eb479f24a92a01c99de
-      internalID: -1094187906
+      spriteID: 568f0dd075b2e0c459754605dc046b55
+      internalID: 241190818
       vertices: []
       indices: 
       edges: []
@@ -210,10 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      reaper_sword-sheet_2: 977442189
-      reaper_sword-sheet_1: -1666560224
-      reaper_sword-sheet_0: 387604966
-      reaper_sword-sheet_3: -1094187906
+      reaper_attack_1: -1690342050
+      reaper_attack_0: 565434533
+      reaper_attack_2: 241190818
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
