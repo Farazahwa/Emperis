@@ -38,6 +38,12 @@ public class Player : MonoBehaviour
         Jump();
     }
 
+    void OnAttack(InputValue value)
+    {
+        Debug.Log(value);
+        
+    }
+
     // Helper Method
     private void Jump()
     {
