@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3b0aa20987089e84e85d6901955811dd
+guid: fbb94f4f072f9164892912404e13752b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,64 +116,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: reaper_attack_0
+      name: Bat_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
-        height: 61
-      alignment: 9
-      pivot: {x: 0.4894515, y: 0.5158227}
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b66c81c6fb0d7bc4ab4fb77b70aca237
-      internalID: 565434533
+      spriteID: 4380877bc2afa5843973490007d3345c
+      internalID: -2090032945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: reaper_attack_1
+      name: Bat_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f8fb9a64f64ec04590bac12ee259011
+      internalID: -478392768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bat_2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
-        height: 61
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd78a335bbd833b4588eac847be377f8
-      internalID: -1690342050
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: reaper_attack_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 71
-        height: 61
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 568f0dd075b2e0c459754605dc046b55
-      internalID: 241190818
+      spriteID: 1a2aca5cf21d1fc49b496d04743c9572
+      internalID: 385769984
       vertices: []
       indices: 
       edges: []
@@ -189,9 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      reaper_attack_1: -1690342050
-      reaper_attack_0: 565434533
-      reaper_attack_2: 241190818
+      Bat_2: 385769984
+      Bat_1: -478392768
+      Bat_0: -2090032945
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
