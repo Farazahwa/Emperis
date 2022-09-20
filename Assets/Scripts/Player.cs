@@ -29,7 +29,19 @@ public class Player : MonoBehaviour
 
         if (_movement < 0)
         {
-            transform.localScale = new Vector3();
+            transform.localScale = new Vector3(-2.5f, 2.2f, 1f);
+        }
+        else if (_movement == 0 && transform.lossyScale.x < 0)
+        {
+            transform.localScale = new Vector3(-2.5f, 2.2f, 1f);
+        }
+        else if (_movement == 0 && transform.lossyScale.x > 0)
+        {
+            transform.localScale = new Vector3(2.5f, 2.2f, 1f);
+        }
+        else 
+        {
+            transform.localScale = new Vector3(2.5f, 2.2f, 1f);
         }
     }
     
@@ -81,5 +93,10 @@ public class Player : MonoBehaviour
             Debug.Log("Collision");
             _movement = 0;
         }
+    }
+
+    public bool SetAttack()
+    {
+        return _attack;
     }
 }
