@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _jump = 10f;
+    [SerializeField] private GameObject _swordRange;
     private Rigidbody2D _rigidbody;
     private float _movement;
     private bool _attack;
@@ -45,6 +46,8 @@ public class Player : MonoBehaviour
         }
     }
     
+#region Input System Controller
+
     // Input System Move
     void OnMove(InputValue value)
     {
@@ -70,7 +73,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Helper Method
+#endregion
+
+#region Helper Method
+
+    // Helper Method for Input System Jump
     private void Jump()
     {
         if (_grounded)
@@ -80,6 +87,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void ActivateSwordRange()
+    {
+        _swordRange.SetActive(true);
+    }
+
+    private void DeactivateSwordRange()
+    {
+        _swordRange.SetActive(false);
+    }
+
+#endregion
+
+#region Collision Method
     // Collision with other game object
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -95,8 +115,5 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool SetAttack()
-    {
-        return _attack;
-    }
+#endregion
 }

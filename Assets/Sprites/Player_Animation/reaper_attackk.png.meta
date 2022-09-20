@@ -124,7 +124,7 @@ TextureImporter:
         width: 64
         height: 0
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -136,10 +136,73 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: reaper_attackk_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d0737620ee67c4429dfd976a0b01a7b
+      internalID: 2083997939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reaper_attackk_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ef94e56ba295fc4fafbab7e370717ce
+      internalID: -1445301125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reaper_attackk_3
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 71
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65fabbf20dd8aa44c8bd6644685d5541
+      internalID: 1131961332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e1ef8ad44c41ec9418468a7b42cb0a76
     internalID: 0
     vertices: []
     indices: 
@@ -147,6 +210,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      reaper_attackk_3: 1131961332
+      reaper_attackk_2: -1445301125
+      reaper_attackk_1: 2083997939
       reaper_attackk_0: -7352915874313098936
   spritePackingTag: 
   pSDRemoveMatte: 0
