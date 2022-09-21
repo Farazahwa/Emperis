@@ -193,50 +193,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6320194824137225098, guid: fff9383c8bc173842b6a93a490b7546d, type: 3}
   m_PrefabInstance: {fileID: 1812134}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &30960196 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2453357934958181840, guid: 9c97bd35285d3fe4590faf1bc6a54eb2, type: 3}
-  m_PrefabInstance: {fileID: 698807194}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &30960199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30960196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 915a69c54fef1214c8ac945d86b84a52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _goblin: {fileID: 1901232306}
---- !u!61 &30960200
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30960196}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &44406564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -389,6 +345,10 @@ PrefabInstance:
     - target: {fileID: 7742180953326435992, guid: 44c97665bccf1fd499fd57c690987643, type: 3}
       propertyPath: m_Name
       value: Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742180953326435992, guid: 44c97665bccf1fd499fd57c690987643, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8007610266341911416, guid: 44c97665bccf1fd499fd57c690987643, type: 3}
       propertyPath: m_GravityScale
@@ -2658,7 +2618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8013540755127994994, guid: 9c97bd35285d3fe4590faf1bc6a54eb2, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8013540755127995007, guid: 9c97bd35285d3fe4590faf1bc6a54eb2, type: 3}
       propertyPath: m_RootOrder
@@ -5259,17 +5219,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e09d9bdd33c95d4bb29f85f9e456a7b, type: 3}
---- !u!114 &1901232306 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2512445317023451687, guid: 44c97665bccf1fd499fd57c690987643, type: 3}
-  m_PrefabInstance: {fileID: 46066444}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 697982fa64e72434197353a002fb45e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1951181697 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3397055621711053899, guid: c5dbbb15c98ec5a4386a5bebb8e67271, type: 3}
@@ -16378,6 +16327,10 @@ PrefabInstance:
     - target: {fileID: 3110269720865829131, guid: 27bbbe19932d54b4fa43d8c1c1ce78a1, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110269720865829131, guid: 27bbbe19932d54b4fa43d8c1c1ce78a1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3110269720865829134, guid: 27bbbe19932d54b4fa43d8c1c1ce78a1, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size

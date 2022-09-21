@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jump = 10f;
     [SerializeField] private float _distance;
     [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private GameObject _swordRange;
     private Rigidbody2D _rigidbody;
     private float _movement;
     private bool _attack;
@@ -24,6 +23,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        HandleRaycast();    
+
         var move = _movement * _speed;
         _rigidbody.velocity = new Vector3(move, _rigidbody.velocity.y);
 
@@ -89,16 +90,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void ActivateSwordRange()
-    {
-        _swordRange.SetActive(true);
-    }
-
-    private void DeactivateSwordRange()
-    {
-        _swordRange.SetActive(false);
-    }
-
 #endregion
 
 #region Collision Method
@@ -120,9 +111,22 @@ public class Player : MonoBehaviour
 
 #endregion
 
+    [System.Diagnostics.Conditional( "DEBUG_CC2D_RAYS" )]
+	void DrawRay( Vector3 start, Vector3 dir, Color color )
+	{
+		Debug.DrawRay( start, dir, color );
+	}
+
+
     private void HandleRaycast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, _distance, _layerMask);
+        var start = transform.position;
+        start.x += transform.position.x * 0.5f;
+        
+        var rayDirection = _movement > 0?  transform.right : -transform.right;
+
+        DrawRay(start, rayDirection * _distance, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(start, rayDirection, _distance, _layerMask);
         if (hit)
         {
             Debug.Log(hit.collider.name);
