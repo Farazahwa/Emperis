@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerSword : MonoBehaviour
 {
+    [SerializeField] private Goblin _goblin;
+
     void Start()
     {
         this.gameObject.SetActive(false);
@@ -13,7 +15,7 @@ public class PlayerSword : MonoBehaviour
     {
         if (other.CompareTag("Goblin"))
         {
-            Destroy(other.gameObject);
+            _goblin.died = true;
         }
     }
 }

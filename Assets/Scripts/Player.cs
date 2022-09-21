@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _jump = 10f;
+    [SerializeField] private float _distance;
+    [SerializeField] private LayerMask _layerMask;
     [SerializeField] private GameObject _swordRange;
     private Rigidbody2D _rigidbody;
     private float _movement;
@@ -100,6 +102,7 @@ public class Player : MonoBehaviour
 #endregion
 
 #region Collision Method
+
     // Collision with other game object
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -116,4 +119,13 @@ public class Player : MonoBehaviour
     }
 
 #endregion
+
+    private void HandleRaycast()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, _distance, _layerMask);
+        if (hit)
+        {
+            Debug.Log(hit.collider.name);
+        }
+    }
 }
