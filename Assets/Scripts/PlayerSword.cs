@@ -11,11 +11,4 @@ public class PlayerSword : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D (Collider2D other)
-    {
-        if (other.CompareTag("Goblin"))
-        {
-            _goblin.died = true;
-        }
-    }
 }

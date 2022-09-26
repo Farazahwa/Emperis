@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8007610266341911416}
   - component: {fileID: 8830048627093318445}
   - component: {fileID: 2512445317023451687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin
   m_TagString: Goblin
   m_Icon: {fileID: 0}
@@ -169,3 +169,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _limit: {fileID: 0}
+  _player: {fileID: 0}
+  died: 0
