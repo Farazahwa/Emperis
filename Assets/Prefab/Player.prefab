@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _jump: 10
-  _distance: 0
+  _attackRange: 0
   _layerMask:
     serializedVersion: 2
     m_Bits: 64

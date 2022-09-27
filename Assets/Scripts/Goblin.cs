@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Goblin : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-    [SerializeField] private Limit _limit;
-    [SerializeField] private GameObject _player;
-    [SerializeField] private float _detectRange;
-    [SerializeField] private float _attackRange;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] 
+    private float _speed = 5f;
+
+    [SerializeField] 
+    private Limit _limit;
+
+    [SerializeField] 
+    private GameObject _player;
+
+    [SerializeField] 
+    private float _detectRange;
+
+    [SerializeField] 
+    private float _attackRange;
+
+    [SerializeField] 
+    private LayerMask _layerMask;
 
     private float _move = 1f;
     private bool _distract = false;
@@ -22,13 +33,12 @@ public class Goblin : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-
-        
     }
 
     void FixedUpdate()
     {
         PlayerDetection();
+        AttackRaycast();
         if (_distract)
         {
             
@@ -48,12 +58,8 @@ public class Goblin : MonoBehaviour
         }
     }
 
-    public void SetDieAnimation()
-    {
-        _anim.SetTrigger("Die");
-        _move = 0;
-    }
-    
+    #region Raycast
+
     void DrawRay( Vector3 start, Vector3 dir, Color color )
 	{
 		Debug.DrawRay( start, dir, color );
@@ -64,7 +70,7 @@ public class Goblin : MonoBehaviour
         _raycastPosition = transform.position;
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
         if (transform.localScale.x < 0) _raycastDirection = -transform.right;
-        
+
 
         DrawRay(_raycastPosition, _raycastDirection * _detectRange, Color.green);
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _detectRange, _layerMask);
@@ -76,10 +82,11 @@ public class Goblin : MonoBehaviour
 
     private void AttackRaycast()
     {
-        _raycastPosition = transform.position;
+        _raycastPosition = transform.position - new Vector3(0, .5f, 0);
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
         if (transform.localScale.x < 0) _raycastDirection = -transform.right;
 
+        
         DrawRay(_raycastPosition, _raycastDirection * _attackRange, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _attackRange,_layerMask);
         if (hit)
@@ -88,10 +95,20 @@ public class Goblin : MonoBehaviour
         }
     }
 
+    #endregion
+
     IEnumerator Attack()
     {
         _anim.SetBool("Attack", true);
         yield return new WaitForSeconds(1);
         _anim.SetBool("Attack", false);
+    }
+
+    
+
+    public void SetDieAnimation()
+    {
+        _anim.SetTrigger("Die");
+        _move = 0;
     }
 }
