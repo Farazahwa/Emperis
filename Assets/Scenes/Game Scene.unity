@@ -1755,6 +1755,10 @@ PrefabInstance:
       value: Wood (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6121005331864610619, guid: 5c9d12a181b6c73478a11d6bed8c6b90, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8d6498ecfc25b084e87414b9ee141f8b, type: 3}
+    - target: {fileID: 6121005331864610619, guid: 5c9d12a181b6c73478a11d6bed8c6b90, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}

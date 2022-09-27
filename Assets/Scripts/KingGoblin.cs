@@ -24,4 +24,6 @@ public class KingGoblin : MonoBehaviour
             _distract = true;
         }
     }
+
+
 }
