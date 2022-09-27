@@ -5,11 +5,21 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 10f;
-    [SerializeField] private float _jump = 10f;
-    [SerializeField] private float _attackRange;
-    [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private Goblin _goblin;
+    [SerializeField] 
+    private float _speed = 10f;
+
+    [SerializeField] 
+    private float _jump = 10f;
+
+    [SerializeField] 
+    private float _attackRange;
+
+    [SerializeField]
+    private LayerMask _layerMask;
+
+    [SerializeField] 
+    private Goblin _goblin;
+
     private Rigidbody2D _rigidbody;
     private float _movement;
     private bool _attack;
@@ -32,6 +42,7 @@ public class Player : MonoBehaviour
         _animator.SetBool("Attack", _attack);
         _animator.SetFloat("Move", Mathf.Abs(move));
 
+        // Change Scale
         if (_movement < 0)
         {
             transform.localScale = new Vector3(-2.5f, 2.2f, 1f);
@@ -55,7 +66,9 @@ public class Player : MonoBehaviour
     // Input System Move
     void OnMove(InputValue value)
     {
+
         _movement = value.Get<float>();
+        Debug.Log(value);
     }
 
     // Input System Jump
@@ -109,9 +122,11 @@ public class Player : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
-	void DrawRay( Vector3 start, Vector3 dir, Color color )
+    #region Raycast
+
+    void DrawRay( Vector3 start, Vector3 dir, Color color )
 	{
 		Debug.DrawRay( start, dir, color );
 	}
@@ -128,7 +143,12 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(raycastPosition, raycastDirection, _attackRange, _layerMask);
         if (hit)
         {
-            
+            if (_attack)
+            {
+                _goblin.SetDieAnimation();
+            }
         }
     }
+
+    #endregion
 }
