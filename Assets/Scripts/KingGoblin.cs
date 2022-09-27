@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class KingGoblin : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-    [SerializeField] private Limit _limit;
+    [SerializeField] 
+    private float _speed = 5f;
+
     private bool _distract = false;
     private Rigidbody2D _rb;
 
@@ -16,9 +17,6 @@ public class KingGoblin : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Set distract from Limit script
-        _distract = _limit.SetDistract();
-
         if (_distract)
         {
             var x = _speed * -1;

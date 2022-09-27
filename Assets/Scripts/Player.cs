@@ -17,11 +17,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMask;
 
-    [SerializeField] 
-    private Goblin _goblin;
-
     private Rigidbody2D _rigidbody;
     private float _movement;
+    private Vector3 _raycastPosition;
+    private Vector3 _raycastDirection;
     private bool _attack;
     private bool _grounded = true;
     private Animator _animator;
@@ -61,14 +60,13 @@ public class Player : MonoBehaviour
         }
     }
     
-#region Input System Controller
+    #region Input System Controller
 
     // Input System Move
     void OnMove(InputValue value)
     {
 
         _movement = value.Get<float>();
-        Debug.Log(value);
     }
 
     // Input System Jump
@@ -90,9 +88,9 @@ public class Player : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
-#region Helper Method
+    #region Helper Method
 
     // Helper Method for Input System Jump
     private void Jump()
@@ -104,9 +102,9 @@ public class Player : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
-#region Collision Method
+    #region Collision Method
 
     // Collision with other game object
     void OnCollisionEnter2D(Collision2D other)
@@ -134,18 +132,18 @@ public class Player : MonoBehaviour
 
     private void AttackRaycast()
     {
-        var raycastPosition = transform.position;
-        var raycastDirection = transform.right;
-        if (_movement > 0) raycastDirection = transform.right;
-        if (_movement < 0) raycastDirection = -transform.right;
+        _raycastPosition = transform.position;
+        if (_movement > 0) _raycastDirection = transform.right;
+        if (_movement < 0) _raycastDirection = -transform.right;
 
-        DrawRay(raycastPosition, raycastDirection * _attackRange, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(raycastPosition, raycastDirection, _attackRange, _layerMask);
+        DrawRay(_raycastPosition, _raycastDirection * _attackRange, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _attackRange, _layerMask);
         if (hit)
         {
-            if (_attack)
+            var enemy = hit.collider.gameObject.GetComponent<Goblin>();
+            if (_attack && enemy != null)
             {
-                _goblin.SetDieAnimation();
+                enemy.SetDieAnimation();
             }
         }
     }

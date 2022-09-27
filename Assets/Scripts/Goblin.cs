@@ -8,9 +8,6 @@ public class Goblin : MonoBehaviour
     private float _speed = 5f;
 
     [SerializeField] 
-    private Limit _limit;
-
-    [SerializeField] 
     private GameObject _player;
 
     [SerializeField] 
@@ -39,9 +36,9 @@ public class Goblin : MonoBehaviour
     {
         PlayerDetection();
         AttackRaycast();
+        
         if (_distract)
         {
-            
             if (_player.transform.position.x < transform.position.x)
             {
                 var x = _move * _speed * -1;
@@ -100,15 +97,20 @@ public class Goblin : MonoBehaviour
     IEnumerator Attack()
     {
         _anim.SetBool("Attack", true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         _anim.SetBool("Attack", false);
     }
 
-    
+    IEnumerator Die()
+    {
+        _anim.SetTrigger("Die");
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
+    }
 
     public void SetDieAnimation()
     {
-        _anim.SetTrigger("Die");
         _move = 0;
+        StartCoroutine(Die());
     }
 }

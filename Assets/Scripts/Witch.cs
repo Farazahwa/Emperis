@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Witch : MonoBehaviour
 {
-    [SerializeField] private Limit _limit;
     private bool _distract = false;
     private Rigidbody2D _rb;
 
@@ -15,9 +14,6 @@ public class Witch : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Set distract from Limit script
-        _distract = _limit.SetDistract();
-
         if (_distract)
         {
             _distract = true;
