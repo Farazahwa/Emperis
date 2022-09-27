@@ -103,11 +103,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _jump: 10
-  _distance: 0
+  _attackRange: 0
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
-  _swordRange: {fileID: 0}
+    m_Bits: 64
+  _goblin: {fileID: 0}
 --- !u!114 &8013540755127995006
 MonoBehaviour:
   m_ObjectHideFlags: 0
