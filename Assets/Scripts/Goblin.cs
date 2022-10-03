@@ -73,6 +73,7 @@ public class Goblin : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _detectRange, _layerMask);
         if (hit)
         {
+            _move = 1;
             _distract = true;
         }
     }
@@ -88,6 +89,7 @@ public class Goblin : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _attackRange,_layerMask);
         if (hit)
         {
+            _move = 0;
             _anim.SetTrigger("Attack");
         }
     }

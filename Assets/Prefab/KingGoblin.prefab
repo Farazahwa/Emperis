@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1629585803868395955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.9957514, y: -2.0034018, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.6, y: 2.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,11 +121,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _attackRange: 1
-  _distractRange: 1.5
+  _attackRange: 3
+  _distractRange: 5
   _layerMask:
     serializedVersion: 2
     m_Bits: 128
+  _player: {fileID: 8013540755127994994, guid: 9c97bd35285d3fe4590faf1bc6a54eb2, type: 3}
 --- !u!61 &7213784109880090921
 BoxCollider2D:
   m_ObjectHideFlags: 0
