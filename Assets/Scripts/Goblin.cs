@@ -88,23 +88,16 @@ public class Goblin : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _attackRange,_layerMask);
         if (hit)
         {
-            StartCoroutine(Attack());
+            _anim.SetTrigger("Attack");
         }
     }
 
     #endregion
 
-    IEnumerator Attack()
-    {
-        _anim.SetBool("Attack", true);
-        yield return new WaitForSeconds(3);
-        _anim.SetBool("Attack", false);
-    }
-
     IEnumerator Die()
     {
         _anim.SetTrigger("Die");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 

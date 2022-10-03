@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         var move = _movement * _speed;
         _rigidbody.velocity = new Vector3(move, _rigidbody.velocity.y);
 
-        _animator.SetBool("Attack", _attack);
+        
         _animator.SetFloat("Move", Mathf.Abs(move));
 
         // Change Scale
@@ -81,6 +81,7 @@ public class Player : MonoBehaviour
         if (input == 1)
         {
             _attack = true;
+            _animator.SetTrigger("Attack");
         }
         else
         {
