@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1150216314711002249}
   - component: {fileID: 7213784109880090921}
   - component: {fileID: 5512349732572297764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: KingGoblin
   m_TagString: King Goblin
   m_Icon: {fileID: 0}

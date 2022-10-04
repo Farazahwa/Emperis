@@ -17,6 +17,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMask;
 
+    [SerializeField]
+    private int _maxHealth = 100;
+
+    [SerializeField]
+    private int _currentHealth;
+
+    [SerializeField]
+    private PlayerHealthBar _playerHealthBar;
+
     private Rigidbody2D _rigidbody;
     private float _movement;
     private Vector3 _raycastPosition;
@@ -25,16 +34,14 @@ public class PlayerController : MonoBehaviour
     private bool _grounded = true;
     private Animator _animator;
 
-    public int maxHealth = 100;
-    public int currentHealth;
-    public PlayerHealthBar playerHealthBar;
+    
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        currentHealth = maxHealth;
-        playerHealthBar.setMaxHealth(maxHealth);
+        _currentHealth = _maxHealth;
+        _playerHealthBar.setMaxHealth(_maxHealth);
     }
 
     void FixedUpdate()
@@ -69,9 +76,9 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        _currentHealth -= damage;
 
-        playerHealthBar.setHealth(currentHealth);
+        _playerHealthBar.setHealth(_currentHealth);
     }
 
     #region Input System Controller

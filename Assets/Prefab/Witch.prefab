@@ -120,12 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495526b7b11148245ae8c2961ac01d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distractRange: 0
-  _attackRange: 0
+  _distractRange: 8
+  _attackRange: 8
   _player: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!50 &7075960370727895985
 Rigidbody2D:
   serializedVersion: 4
