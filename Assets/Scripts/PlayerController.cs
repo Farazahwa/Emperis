@@ -25,14 +25,21 @@ public class PlayerController : MonoBehaviour
     private bool _grounded = true;
     private Animator _animator;
 
+    public int maxHealth = 100;
+    public int currentHealth;
+    public PlayerHealthBar playerHealthBar;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
+        playerHealthBar.setMaxHealth(maxHealth);
     }
 
     void FixedUpdate()
     {
+        
         AttackRaycast();    
 
         var move = _movement * _speed;
@@ -59,7 +66,14 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(2.5f, 2.2f, 1f);
         }
     }
-    
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        playerHealthBar.setHealth(currentHealth);
+    }
+
     #region Input System Controller
 
     // Input System Move
@@ -87,6 +101,11 @@ public class PlayerController : MonoBehaviour
         {
             _attack = false;
         }
+    }
+
+    void OnTest(InputValue value)
+    {
+        TakeDamage(20);
     }
 
     #endregion
