@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5512349732572297764}
   m_Layer: 0
   m_Name: KingGoblin
-  m_TagString: Untagged
+  m_TagString: King Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95681dddea55b664cb582a9465c7fa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _attackRange: 3
+  _speed: 2
+  _attackRange: 1.5
   _distractRange: 5
   _layerMask:
     serializedVersion: 2
