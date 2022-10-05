@@ -19,6 +19,8 @@ public class KingGoblinController : MonoBehaviour
     [SerializeField]
     private GameObject _player;
 
+    [SerializeField]
+    private List<GameObject> _pointer;
 
     private float _move = 1f;
     private bool _distract = false;
@@ -34,9 +36,9 @@ public class KingGoblinController : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
-    private void Start()
+    void Start()
     {
-        transform.localScale = new Vector3(-2.6f, 2.6f);
+        
     }
 
     void FixedUpdate()
@@ -45,21 +47,14 @@ public class KingGoblinController : MonoBehaviour
         AttackRaycast();
 
 
+
         if (_distract)
         {
-            if (_player.transform.position.x < transform.position.x)
-            {
-                var x = _move * _speed * -1;
-                _rb.velocity = new Vector3(x, _rb.velocity.y);
-                transform.localScale = new Vector3(-2.6f, 2.6f);
-            }
-            if (_player.transform.position.x > transform.position.x)
-            {
-                var x = _move * _speed;
-                _rb.velocity = new Vector3(x, _rb.velocity.y);
-                transform.localScale = new Vector3(2.6f, 2.6f);
-            }
-            _distract = true;
+            DistractByPlayer();
+        }
+        else
+        {
+            Patrol();
         }
     }
 
@@ -102,6 +97,50 @@ public class KingGoblinController : MonoBehaviour
     }
 
     #endregion
+
+    #region Helper Method
+
+    private void Patrol()
+    {
+        float x;
+        if (transform.position.x > _pointer[1].transform.position.x || transform.localScale.x < 0)
+        {
+            x = _move * _speed * -1;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(-2.6f, 2.6f);
+        }
+
+        if (transform.position.x < _pointer[0].transform.position.x || transform.localScale.x > 0)
+        {
+            x = _move * _speed;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(2.6f, 2.6f); 
+        }
+    }
+
+    private void DistractByPlayer()
+    {
+        if (_player.transform.position.x < transform.position.x)
+        {
+            var x = _move * _speed * -1;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(-2.6f, 2.6f);
+        }
+        if (_player.transform.position.x > transform.position.x)
+        {
+            var x = _move * _speed;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(2.6f, 2.6f);
+        }
+        _distract = true;
+    }
+
+    private void Move()
+    {
+
+    }
+    #endregion
+
 
     IEnumerator Die()
     {
