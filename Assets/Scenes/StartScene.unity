@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 632574204}
   - component: {fileID: 632574206}
   - component: {fileID: 632574208}
+  - component: {fileID: 632574209}
   - component: {fileID: 632574207}
   m_Layer: 5
   m_Name: PlayButton
@@ -249,6 +250,18 @@ MonoBehaviour:
       - m_Target: {fileID: 632574208}
         m_TargetAssemblyTypeName: ClickyButton, Assembly-CSharp
         m_MethodName: WasClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 632574209}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: NextScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -372,6 +385,19 @@ MonoBehaviour:
   _compressClip: {fileID: 8300000, guid: ee91e94e8c5f54d4ca81ffb43e419b9d, type: 3}
   _uncompressClip: {fileID: 8300000, guid: c9c9f4c6b06104344afa155b45c9d5c7, type: 3}
   _source: {fileID: 632574207}
+--- !u!114 &632574209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632574202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2b9807abfe453428e64482ad09fa0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneNumber: 0
 --- !u!1 &824442912
 GameObject:
   m_ObjectHideFlags: 0
