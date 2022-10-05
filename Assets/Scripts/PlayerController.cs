@@ -17,6 +17,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMask;
 
+    [SerializeField]
+    private int _maxHealth = 100;
+
+    [SerializeField]
+    private int _currentHealth;
+
+    [SerializeField]
+    private PlayerHealthBar _playerHealthBar;
+
     private Rigidbody2D _rigidbody;
     private float _movement;
     private Vector3 _raycastPosition;
@@ -25,14 +34,19 @@ public class PlayerController : MonoBehaviour
     private bool _grounded = true;
     private Animator _animator;
 
+    
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _currentHealth = _maxHealth;
+        _playerHealthBar.setMaxHealth(_maxHealth);
     }
 
     void FixedUpdate()
     {
+        
         AttackRaycast();    
 
         var move = _movement * _speed;
@@ -59,7 +73,14 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(2.5f, 2.2f, 1f);
         }
     }
-    
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+
+        _playerHealthBar.setHealth(_currentHealth);
+    }
+
     #region Input System Controller
 
     // Input System Move
@@ -87,6 +108,11 @@ public class PlayerController : MonoBehaviour
         {
             _attack = false;
         }
+    }
+
+    void OnTest(InputValue value)
+    {
+        TakeDamage(20);
     }
 
     #endregion
