@@ -41,4 +41,10 @@ public class ClickyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         Debug.Log("Click!");
         _mainmenu.LoadStart("Game Scene");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Exit");
+    }
 }
