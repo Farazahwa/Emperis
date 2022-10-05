@@ -506,9 +506,6 @@ MonoBehaviour:
   _compressClip: {fileID: 8300000, guid: ee91e94e8c5f54d4ca81ffb43e419b9d, type: 3}
   _uncompressClip: {fileID: 8300000, guid: c9c9f4c6b06104344afa155b45c9d5c7, type: 3}
   _source: {fileID: 632574207}
-<<<<<<< HEAD
---- !u!114 &632574209
-=======
 --- !u!1 &723526874
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,22 +593,11 @@ RectTransform:
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724608892
->>>>>>> bda35a733b03d4a8e7405c81c83bd141c877ee6f
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 632574202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d2b9807abfe453428e64482ad09fa0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneNumber: 0
---- !u!1 &824442912
-=======
   m_GameObject: {fileID: 724608890}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1245,7 +1231,6 @@ CanvasRenderer:
   m_GameObject: {fileID: 1421245871}
   m_CullTransparentMesh: 1
 --- !u!1 &1693112340
->>>>>>> bda35a733b03d4a8e7405c81c83bd141c877ee6f
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
