@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Sprites/Item/Skull.png.meta
-guid: 8fb1571edeb34dc449f5cace96f30f5e
-========
-guid: cc43b7f8767bb8f45a967229cc809fa5
->>>>>>>> 776f601e0bf15644e638bbb530827dded0e419af:Assets/Sprites/Start_Item/Button/About.png.meta
+guid: 37c06654122dafc4891fd324aaaddda1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -51,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
