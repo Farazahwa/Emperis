@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 <<<<<<<< HEAD:Assets/Sprites/Item/Skull.png.meta
+<<<<<<< HEAD
 guid: 081b62314f2ebf143bc2d0357d07b1cd
+=======
+guid: 39da80fdb29eac64a804b2f2f4a8f733
+>>>>>>> 3190c090e1db33b53c74d099e5c2ae38067e916f
 ========
 guid: cc43b7f8767bb8f45a967229cc809fa5
 >>>>>>>> 776f601e0bf15644e638bbb530827dded0e419af:Assets/Sprites/Start_Item/Button/About.png.meta
