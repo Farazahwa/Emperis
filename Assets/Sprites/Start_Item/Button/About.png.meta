@@ -1,21 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<<< HEAD:Assets/Sprites/Item/Skull.png.meta
-<<<<<<< HEAD
 guid: 86afb95239287294ba08d479c64b545e
-=======
-<<<<<<< HEAD
-guid: 081b62314f2ebf143bc2d0357d07b1cd
-=======
-guid: 39da80fdb29eac64a804b2f2f4a8f733
->>>>>>> 3190c090e1db33b53c74d099e5c2ae38067e916f
->>>>>>> d557e4b8e3161a9b44fefa89cd62d03f638d6404
-========
-guid: cc43b7f8767bb8f45a967229cc809fa5
->>>>>>>> 776f601e0bf15644e638bbb530827dded0e419af:Assets/Sprites/Start_Item/Button/About.png.meta
-=======
-guid: eef70ccf778b2de459ff67bc8db77d8c
->>>>>>> 6e46e88acc1a50307c991bf62069804088bb0760
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -82,42 +66,6 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
