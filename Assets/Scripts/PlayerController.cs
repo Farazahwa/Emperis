@@ -145,7 +145,9 @@ public class PlayerController : MonoBehaviour
         {
             _movement = 0;
         }
+
     }
+
 
     #endregion
 
