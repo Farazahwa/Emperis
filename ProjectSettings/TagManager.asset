@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Goblin
   - King Goblin
+  - Trap
   layers:
   - Default
   - TransparentFX
