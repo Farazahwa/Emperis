@@ -45,9 +45,7 @@ public class KingGoblinController : MonoBehaviour
     {
         PlayerDetection();
         AttackRaycast();
-
-
-
+        Move();
         if (_distract)
         {
             DistractByPlayer();
@@ -137,8 +135,9 @@ public class KingGoblinController : MonoBehaviour
 
     private void Move()
     {
-
+        _anim.SetFloat("Move", _move);
     }
+
     #endregion
 
 

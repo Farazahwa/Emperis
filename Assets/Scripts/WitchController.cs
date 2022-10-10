@@ -37,13 +37,13 @@ public class WitchController : MonoBehaviour
 
         if (_distract)
         {
-            if (_player.transform.position.x < transform.position.x)
-            {
-                transform.localScale = new Vector3(-2.6f, 2.6f);
-            }
             if (_player.transform.position.x > transform.position.x)
             {
-                transform.localScale = new Vector3(2.6f, 2.6f);
+                transform.localScale = new Vector3(-5f, 5f);
+            }
+            if (_player.transform.position.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(5f, 5f);
             }
             _distract = true;
         }

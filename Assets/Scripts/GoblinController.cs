@@ -19,6 +19,9 @@ public class GoblinController : MonoBehaviour
     [SerializeField] 
     private LayerMask _layerMask;
 
+    [SerializeField]
+    private List<GameObject> _pointer;
+
     private float _move = 1f;
     private bool _distract = false;
     private Rigidbody2D _rb;
@@ -39,19 +42,11 @@ public class GoblinController : MonoBehaviour
         
         if (_distract)
         {
-            if (_player.transform.position.x < transform.position.x)
-            {
-                var x = _move * _speed * -1;
-                _rb.velocity = new Vector3(x, _rb.velocity.y);
-                transform.localScale = new Vector3(-2.5f, 2.2f);
-            }
-            if (_player.transform.position.x > transform.position.x)
-            {
-                var x = _move * _speed;
-                _rb.velocity = new Vector3(x, _rb.velocity.y);
-                transform.localScale = new Vector3(2.5f, 2.2f);
-            }
-            _distract = true;
+            DistractByPlayer();
+        }
+        else
+        {
+            Patrol();
         }
     }
 
@@ -102,6 +97,54 @@ public class GoblinController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
+
+    #region Helper Method
+
+    private void DistractByPlayer()
+    {
+        // Check goblin move with scale
+        if (_player.transform.position.x < transform.position.x)
+        {
+            var x = _move * _speed * -1;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(-2.5f, 2.2f);
+        }
+        if (_player.transform.position.x > transform.position.x)
+        {
+            var x = _move * _speed;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(2.5f, 2.2f);
+        }
+        _distract = true;
+    }
+
+    private void Patrol()
+    {
+        // Check the goblin have pointers or not
+        if (_pointer.Count == 0)
+        {
+            return;
+        }
+
+        float x;
+
+        // Check if goblin have the same x position with the pointer
+        if (transform.position.x > _pointer[1].transform.position.x || transform.localScale.x < 0)
+        {
+            x = _move * _speed * -1;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(-2.6f, 2.6f);
+        }
+
+        if (transform.position.x < _pointer[0].transform.position.x || transform.localScale.x > 0)
+        {
+            x = _move * _speed;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(2.6f, 2.6f);
+        }
+    }
+
+    #endregion
 
     public void SetDieAnimation()
     {
