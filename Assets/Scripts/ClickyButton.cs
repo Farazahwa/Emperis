@@ -18,7 +18,6 @@ public class ClickyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private AudioClip _compressClip, _uncompressClip;
     [SerializeField] private AudioSource _source;
     private MainMenu _mainmenu;
-
     void Awake()
     {
         _mainmenu = new MainMenu();
@@ -46,5 +45,10 @@ public class ClickyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         Application.Quit();
         Debug.Log("Exit");
+    }
+
+    public void sound_volume(float volume)
+    {
+        PlayerPrefs.SetFloat("volume",volume);
     }
 }
