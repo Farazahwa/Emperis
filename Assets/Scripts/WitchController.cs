@@ -59,8 +59,8 @@ public class WitchController : MonoBehaviour
     private void PlayerDetection()
     {
         _raycastPosition = transform.position - new Vector3(0, 0.3f, 0);
-        if (transform.localScale.x > 0) _raycastDirection = transform.right;
-        if (transform.localScale.x < 0) _raycastDirection = -transform.right;
+        if (transform.localScale.x < 0) _raycastDirection = transform.right;
+        if (transform.localScale.x > 0) _raycastDirection = -transform.right;
 
         DrawRay(_raycastPosition, _raycastDirection * _distractRange, Color.green);
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _distractRange, _layerMask);
@@ -73,8 +73,8 @@ public class WitchController : MonoBehaviour
     private void AttackRaycast()
     {
         _raycastPosition = transform.position - new Vector3(0, .5f, 0);
-        if (transform.localScale.x > 0) _raycastDirection = transform.right;
-        if (transform.localScale.x < 0) _raycastDirection = -transform.right;
+        if (transform.localScale.x < 0) _raycastDirection = transform.right;
+        if (transform.localScale.x > 0) _raycastDirection = -transform.right;
 
 
         DrawRay(_raycastPosition, _raycastDirection * _attackRange, Color.red);

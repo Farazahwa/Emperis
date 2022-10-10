@@ -119,12 +119,12 @@ TextureImporter:
       name: Witch_died_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: Witch_died_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 94
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -161,12 +161,12 @@ TextureImporter:
       name: Witch_died_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 158
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -182,12 +182,12 @@ TextureImporter:
       name: Witch_died_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 213
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 39
+        height: 22
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -203,12 +203,12 @@ TextureImporter:
       name: Witch_died_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 279
         y: 0
-        width: 64
-        height: 64
+        width: 38
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -224,12 +224,12 @@ TextureImporter:
       name: Witch_died_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 346
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 36
+        height: 26
+      alignment: 9
+      pivot: {x: 0.44444445, y: 0.42307693}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -245,12 +245,12 @@ TextureImporter:
       name: Witch_died_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 408
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 37
+        height: 28
+      alignment: 9
+      pivot: {x: 0.4864865, y: 0.39285716}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -266,12 +266,12 @@ TextureImporter:
       name: Witch_died_7
       rect:
         serializedVersion: 2
-        x: 448
+        x: 478
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 32
+        height: 22
+      alignment: 9
+      pivot: {x: 0.375, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -296,6 +296,7 @@ TextureImporter:
     nameFileIdTable:
       Witch_died_2: -1660799031
       Witch_died_4: 1613157087
+      Witch_died_8: -698792931
       Witch_died_3: -909769706
       Witch_died_0: -330399224
       Witch_died_1: 2042890792

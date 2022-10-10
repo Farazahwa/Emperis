@@ -119,12 +119,12 @@ TextureImporter:
       name: Witch_attack_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 28
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: Witch_attack_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 92
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -161,12 +161,12 @@ TextureImporter:
       name: Witch_attack_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 155
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 22
+      alignment: 9
+      pivot: {x: 0.6140518, y: 0.46889496}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -182,12 +182,12 @@ TextureImporter:
       name: Witch_attack_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 217
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -203,12 +203,12 @@ TextureImporter:
       name: Witch_attack_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 282
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -224,12 +224,12 @@ TextureImporter:
       name: Witch_attack_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 345
         y: 0
-        width: 64
-        height: 64
+        width: 24
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -252,12 +252,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Witch_attack_1: -2088449479
-      Witch_attack_5: 189243412
-      Witch_attack_4: 1949684255
+      Witch_attack_1: 2055917818
+      Witch_attack_5: -2088449479
+      Witch_attack_4: 370419419
       Witch_attack_3: 1647900037
-      Witch_attack_0: 2055917818
-      Witch_attack_2: 370419419
+      Witch_attack_0: 1949684255
+      Witch_attack_2: 189243412
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
