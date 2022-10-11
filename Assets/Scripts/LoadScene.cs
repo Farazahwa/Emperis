@@ -2,12 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class LoadScene : MonoBehaviour
 {
     public GameObject LoadingScreen;
 
     public Slider slider;
+
+    public TextMeshProUGUI progressText;
 
     public void LoadLevel(int sceneIndex)
     {
@@ -28,6 +32,7 @@ public class LoadScene : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / .9f);
             
             slider.value = progress;
+            progressText.text = progress * 100f + "%";
 
             //wait until the next frame
             yield return null;
