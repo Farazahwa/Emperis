@@ -18,6 +18,7 @@ public class ClickyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private AudioClip _compressClip, _uncompressClip;
     [SerializeField] private AudioSource _source;
     private MainMenu _mainmenu;
+
     void Awake()
     {
         _mainmenu = new MainMenu();
@@ -38,7 +39,7 @@ public class ClickyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void WasClicked()
     {
         Debug.Log("Click!");
-        _mainmenu.LoadStart("Game Scene");
+        // _mainmenu.LoadStart("Game Scene");
     }
 
     public void QuitGame()
