@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private bool _grounded = true;
     private Animator _animator;
 
-    
+    public float thrust = 1.0f;
 
     void Start()
     {
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _currentHealth = _maxHealth;
         _playerHealthBar.setMaxHealth(_maxHealth);
+       
     }
 
     void FixedUpdate()
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
-
+        _rigidbody.AddForce(new Vector3(0f, 0f, thrust), ForceMode2D.Impulse);
         _playerHealthBar.setHealth(_currentHealth);
     }
 
@@ -185,5 +186,4 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
-
 }

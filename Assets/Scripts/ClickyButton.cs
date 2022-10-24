@@ -39,12 +39,17 @@ public class ClickyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void WasClicked()
     {
         Debug.Log("Click!");
-        _mainmenu.LoadStart("Game Scene");
+        // _mainmenu.LoadStart("Game Scene");
     }
 
     public void QuitGame()
     {
         Application.Quit();
         Debug.Log("Exit");
+    }
+
+    public void sound_volume(float volume)
+    {
+        PlayerPrefs.SetFloat("volume",volume);
     }
 }
