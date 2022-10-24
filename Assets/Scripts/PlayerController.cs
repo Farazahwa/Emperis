@@ -42,12 +42,10 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _currentHealth = _maxHealth;
         _playerHealthBar.setMaxHealth(_maxHealth);
-       
     }
 
     void FixedUpdate()
     {
-        
         AttackRaycast();    
 
         var move = _movement * _speed;
