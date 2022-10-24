@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _currentHealth = _maxHealth;
         _playerHealthBar.setMaxHealth(_maxHealth);
-       
     }
 
     void FixedUpdate()
@@ -145,6 +144,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             _movement = 0;
+        }
+
+        if (other.gameObject.CompareTag("Trap"))
+        {
+            TakeDamage(7);
         }
 
     }
