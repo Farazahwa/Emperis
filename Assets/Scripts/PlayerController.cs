@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerHealthBar _playerHealthBar;
 
+    //control how powerful the knockback(strength)
+    [SerializeField]
+    private float strength = 16, delay = 0.15f;
+
     private Rigidbody2D _rigidbody;
     private float _movement;
     private Vector3 _raycastPosition;
@@ -35,6 +40,8 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
 
     public float thrust = 1.0f;
+
+    public UnityEvent OnBegin, OnDone;
 
     void Start()
     {
@@ -46,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
         AttackRaycast();    
 
         var move = _movement * _speed;
@@ -187,6 +193,32 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    #endregion
+
+    #region Feedback Enemy Object
+
+    //sender object to know direction should apply the snug back feedback
+    //if player attacks the enemy, we're going to calculate the direction from the player to the enemy
+    public void PlayFeedback(GameObject sender)
+    {
+        StopAllCoroutines();
+        OnBegin?.Invoke();
+        Vector2 direction = (transform.position-sender.transform.position).normalized;
+        _rigidbody.AddForce(direction*strength, ForceMode2D.Impulse); //will make player fly in the opposite direction
+        StartCoroutines(Reset());
+    }
+
+    #endregion
+
+    #region Reset the KnockBack Feedback to Stop
+
+    private IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(delay);
+        _rigidbody.velocity = Vector3.zero;
+        OnDone?.Invoke();
     }
 
     #endregion
