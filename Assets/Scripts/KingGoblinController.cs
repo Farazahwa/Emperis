@@ -95,7 +95,6 @@ public class KingGoblinController : MonoBehaviour
                 _anim.SetTrigger("Attack");
                 break;
         }
-
     }
 
     #region Raycast 
