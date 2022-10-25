@@ -214,12 +214,12 @@ public class PlayerController : MonoBehaviour
 
     #region Reset the KnockBack Feedback to Stop
 
-    private IEnumerator Reset()
-    {
-        yield return new WaitForSeconds(delay);
-        _rigidbody.velocity = Vector3.zero;
-        OnDone?.Invoke();
-    }
+    // private IEnumerator Reset()
+    // {
+    //     yield return new WaitForSeconds(delay);
+    //     _rigidbody.velocity = Vector3.zero;
+    //     OnDone?.Invoke();
+    // }
 
     #endregion
 }
