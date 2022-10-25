@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerHealthBar : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerHealthBar : MonoBehaviour
 
     public void setHealth(int health)
     {
-        slider.value = health;
+        slider.DOValue(health, .5f);
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
