@@ -22,12 +22,6 @@ public class KingGoblinController : MonoBehaviour
     [SerializeField]
     private List<GameObject> _pointer;
 
-    private float _move = 1f;
-    private Rigidbody2D _rb;
-    private Animator _anim;
-    private Vector3 _raycastPosition;
-    private Vector3 _raycastDirection;
-
     enum State
     {
         Waiting,
@@ -42,8 +36,15 @@ public class KingGoblinController : MonoBehaviour
         Attack
     }
 
-    State state;
 
+    private float _move = 1f;
+    private float _waitingDelay = 2f;
+    private int _targetIndex = 0;
+    private Rigidbody2D _rb;
+    private Animator _anim;
+    private Vector3 _raycastPosition;
+    private Vector3 _raycastDirection;
+    private State _state;
 
     void Awake()
     {
@@ -53,7 +54,8 @@ public class KingGoblinController : MonoBehaviour
 
     private void Start()
     {
-        state = State.Patrolling;
+        _state = State.Patrolling;
+
     }
 
     void FixedUpdate()
@@ -61,7 +63,7 @@ public class KingGoblinController : MonoBehaviour
         PlayerDetection();
         AttackRaycast();
 
-        switch (state)
+        switch (_state)
         {
             case State.Patrolling:
                 AnimationControl(Animation.Move);
@@ -73,7 +75,7 @@ public class KingGoblinController : MonoBehaviour
                 break;
             case State.Waiting:
                 AnimationControl(Animation.Idle);
-                StartCoroutine(Waiting());
+                Waiting();
                 break;
             case State.Attacking:
                 AnimationControl(Animation.Attack);
@@ -114,7 +116,7 @@ public class KingGoblinController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _distractRange, _layerMask);
         if (hit)
         {
-            state = State.Chasing;
+            _state = State.Chasing;
         }
     }
 
@@ -130,7 +132,7 @@ public class KingGoblinController : MonoBehaviour
         if (hit)
         {
             _move = 0;
-            state = State.Attacking;
+            _state = State.Attacking;
         }
     }
 
@@ -142,7 +144,7 @@ public class KingGoblinController : MonoBehaviour
     {
         float x;
         if (transform.localScale.x < 0)
-        {
+        {   
             x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
             transform.localScale = new Vector3(-2.6f, 2.6f);
@@ -155,10 +157,10 @@ public class KingGoblinController : MonoBehaviour
             transform.localScale = new Vector3(2.6f, 2.6f); 
         }
 
-        if (transform.position.x < _pointer[0].transform.position.x ||
-            transform.position.x > _pointer[1].transform.position.x)
+        if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .7f)
         {
-            state = State.Waiting;
+            _targetIndex = (_targetIndex + 1) % _pointer.Count;
+            _state = State.Waiting;
         }
     }
 
@@ -178,22 +180,25 @@ public class KingGoblinController : MonoBehaviour
         }
     }
 
-    IEnumerator Waiting()
+    private void Waiting()
     {
         _move = 0;
-        yield return new WaitForSeconds(2);
-
-        if (transform.localScale.x < 0)
+        _waitingDelay -= Time.deltaTime;
+        Debug.Log(_waitingDelay);
+        if (_waitingDelay <= 0)
         {
-            transform.localScale = new Vector3(2.6f, 2.6f);
+            if (transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector3(2.6f, 2.6f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-2.6f, 2.6f);
+            }
+            _move = 1;
+            _waitingDelay = 2f;
+            _state = State.Patrolling;
         }
-
-        if (transform.localScale.x > 0)
-        {
-            transform.localScale = new Vector3(-2.6f, 2.6f);
-        }
-        _move = 1;
-        state = State.Patrolling;
     }
 
     #endregion
