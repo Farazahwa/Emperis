@@ -201,14 +201,14 @@ public class PlayerController : MonoBehaviour
 
     //sender object to know direction should apply the snug back feedback
     //if player attacks the enemy, we're going to calculate the direction from the player to the enemy
-    public void PlayFeedback(GameObject sender)
-    {
-        StopAllCoroutines();
-        OnBegin?.Invoke();
-        Vector2 direction = (transform.position-sender.transform.position).normalized;
-        _rigidbody.AddForce(direction*strength, ForceMode2D.Impulse); //will make player fly in the opposite direction
-        StartCoroutines(Reset());
-    }
+    //public void PlayFeedback(GameObject sender)
+    //{
+    //    StopAllCoroutines();
+    //    OnBegin?.Invoke();
+    //    Vector2 direction = (transform.position-sender.transform.position).normalized;
+    //    _rigidbody.AddForce(direction*strength, ForceMode2D.Impulse); //will make player fly in the opposite direction
+    //    StartCoroutines(Reset());
+    //}
 
     #endregion
 
