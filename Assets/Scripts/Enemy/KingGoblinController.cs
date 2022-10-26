@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class KingGoblinController : MonoBehaviour
 {
     [SerializeField] 
@@ -36,15 +37,22 @@ public class KingGoblinController : MonoBehaviour
         Attack
     }
 
+    #region private instance variable
 
     private float _move = 1f;
     private float _waitingDelay = 2f;
+
     private int _targetIndex = 0;
+
     private Rigidbody2D _rb;
     private Animator _anim;
+
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
+
     private State _state;
+
+    #endregion
 
     void Awake()
     {
@@ -97,6 +105,7 @@ public class KingGoblinController : MonoBehaviour
                 _anim.SetTrigger("Attack");
                 break;
         }
+
     }
 
     #region Raycast 

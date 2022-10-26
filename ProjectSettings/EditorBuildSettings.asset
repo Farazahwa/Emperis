@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
+    path: Assets/Prefab/Scenes/StartScene.unity
     guid: 7a782604f7f94b94eaea2a2bc3746da2
   - enabled: 1
-    path: Assets/Scenes/Game Scene.unity
+    path: Assets/Prefab/Scenes/Game Scene.unity
     guid: 0b298181b94fca143bf1cb734480d739
   m_configObjects: {}
