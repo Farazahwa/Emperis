@@ -23,11 +23,34 @@ public class GoblinController : MonoBehaviour
     private List<GameObject> _pointer;
 
     private float _move = 1f;
-    private bool _distract = false;
+    private float _waitingDelay = 2f;
+
+    private int _targetIndex = 0;
+
     private Rigidbody2D _rb;
     private Animator _anim;
+
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
+
+    enum State
+    {
+        Waiting,
+        Patrolling,
+        Chasing,
+        Attacking,
+        Death
+    }
+
+    enum Animation
+    {
+        Idle,
+        Move,
+        Attack,
+        Die
+    }
+
+    private State _state;
 
     void Awake()
     {
@@ -35,18 +58,55 @@ public class GoblinController : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        _state = State.Patrolling;
+    }
+
     void FixedUpdate()
     {
         PlayerDetection();
         AttackRaycast();
-        
-        if (_distract)
+
+        switch (_state)
         {
-            DistractByPlayer();
+            case State.Waiting:
+                AnimationControl(Animation.Idle);
+                Waiting();
+                break;
+            case State.Patrolling:
+                AnimationControl(Animation.Move);
+                Patrol();
+                break;
+            case State.Chasing:
+                AnimationControl(Animation.Move);
+                Chasing();
+                break;
+            case State.Attacking:
+                AnimationControl(Animation.Attack);
+                break;
+            case State.Death:
+                AnimationControl(Animation.Die);
+                break;
         }
-        else
+    }
+
+    private void AnimationControl(Animation animation)
+    {
+        switch (animation)
         {
-            Patrol();
+            case Animation.Idle:
+                _anim.SetBool("Move", false);
+                break;
+            case Animation.Move:
+                _anim.SetBool("Move", true);
+                break;
+            case Animation.Attack:
+                _anim.SetTrigger("Attack");
+                break;
+            case Animation.Die:
+                _anim.SetTrigger("Die");
+                break;
         }
     }
 
@@ -69,7 +129,7 @@ public class GoblinController : MonoBehaviour
         if (hit)
         {
             _move = 1;
-            _distract = true;
+            _state = State.Chasing;
         }
     }
 
@@ -85,22 +145,16 @@ public class GoblinController : MonoBehaviour
         if (hit)
         {
             _move = 0;
-            _anim.SetTrigger("Attack");
+            _state = State.Attacking;
         }
     }
 
     #endregion
 
-    IEnumerator Die()
-    {
-        _anim.SetTrigger("Die");
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
-    }
 
-    #region Helper Method
+    #region Goblin State
 
-    private void DistractByPlayer()
+    private void Chasing()
     {
         // Check goblin move with scale
         if (_player.transform.position.x < transform.position.x)
@@ -115,32 +169,49 @@ public class GoblinController : MonoBehaviour
             _rb.velocity = new Vector3(x, _rb.velocity.y);
             transform.localScale = new Vector3(2.5f, 2.2f);
         }
-        _distract = true;
     }
 
     private void Patrol()
     {
-        // Check the goblin have pointers or not
-        if (_pointer.Count == 0)
-        {
-            return;
-        }
-
         float x;
 
-        // Check if goblin have the same x position with the pointer
-        if (transform.position.x > _pointer[1].transform.position.x || transform.localScale.x < 0)
+        if (transform.localScale.x < 0)
         {
             x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(-2.6f, 2.6f);
+            transform.localScale = new Vector3(-2.5f, 2.2f);
         }
-
-        if (transform.position.x < _pointer[0].transform.position.x || transform.localScale.x > 0)
+        if (transform.localScale.x > 0)
         {
             x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(2.6f, 2.6f);
+            transform.localScale = new Vector3(2.5f, 2.2f);
+        }
+
+        if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
+        {
+            _targetIndex = (_targetIndex + 1) % 2;
+            _state = State.Waiting;
+        }
+    }
+
+    private void Waiting()
+    {
+        _move = 0;
+        _waitingDelay -= Time.deltaTime;
+        if (_waitingDelay == 0)
+        {
+            if (transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector3(2.5f, 2.2f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-2.5f, 2.2f);
+            }
+            _move = 1;
+            _waitingDelay = 2f;
+            _state = State.Patrolling;
         }
     }
 
@@ -148,7 +219,6 @@ public class GoblinController : MonoBehaviour
 
     public void SetDieAnimation()
     {
-        _move = 0;
-        StartCoroutine(Die());
+        _state = State.Death;
     }
 }

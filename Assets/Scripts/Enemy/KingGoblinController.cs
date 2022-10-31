@@ -166,7 +166,8 @@ public class KingGoblinController : MonoBehaviour
             transform.localScale = new Vector3(2.6f, 2.6f); 
         }
 
-        if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .7f)
+        Debug.Log(Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position));
+        if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
         {
             _targetIndex = (_targetIndex + 1) % _pointer.Count;
             _state = State.Waiting;
