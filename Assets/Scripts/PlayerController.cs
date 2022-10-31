@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool _attack;
     private bool _grounded = true;
     private Animator _animator;
+    private Animator anim;
 
     public float thrust = 1.0f;
 
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _currentHealth = _maxHealth;
         _playerHealthBar.setMaxHealth(_maxHealth);
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -157,6 +159,17 @@ public class PlayerController : MonoBehaviour
             TakeDamage(7);
         }
 
+        if (other.gameObject.CompareTag("Lava"))
+        {
+            TakeDamage(100);
+            Die();
+        }
+
+    }
+
+    void Die()
+    {
+        anim.SetTrigger("death");
     }
 
 

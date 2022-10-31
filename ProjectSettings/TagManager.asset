@@ -9,6 +9,7 @@ TagManager:
   - Goblin
   - King Goblin
   - Trap
+  - Lava
   layers:
   - Default
   - TransparentFX
