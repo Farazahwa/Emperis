@@ -8,9 +8,6 @@ public class GoblinController : MonoBehaviour
     private float _speed = 5f;
 
     [SerializeField] 
-    private GameObject _player;
-
-    [SerializeField] 
     private float _detectRange;
 
     [SerializeField] 
@@ -22,16 +19,8 @@ public class GoblinController : MonoBehaviour
     [SerializeField]
     private List<GameObject> _pointer;
 
-    private float _move = 1f;
+    [SerializeField]
     private float _waitingDelay = 2f;
-
-    private int _targetIndex = 0;
-
-    private Rigidbody2D _rb;
-    private Animator _anim;
-
-    private Vector3 _raycastPosition;
-    private Vector3 _raycastDirection;
 
     enum State
     {
@@ -50,7 +39,23 @@ public class GoblinController : MonoBehaviour
         Die
     }
 
+    #region private instance variable
+
+    private float _move = 1f;
+
+    private int _targetIndex = 0;
+
+    private Rigidbody2D _rb;
+    private Animator _anim;
+    private Transform _player;
+
+    private Vector3 _raycastPosition;
+    private Vector3 _raycastDirection;
+
     private State _state;
+
+    #endregion
+
 
     void Awake()
     {
@@ -63,11 +68,8 @@ public class GoblinController : MonoBehaviour
         _state = State.Patrolling;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        PlayerDetection();
-        AttackRaycast();
-
         switch (_state)
         {
             case State.Waiting:
@@ -84,6 +86,7 @@ public class GoblinController : MonoBehaviour
                 break;
             case State.Attacking:
                 AnimationControl(Animation.Attack);
+                Attack();
                 break;
             case State.Death:
                 AnimationControl(Animation.Die);
@@ -129,6 +132,7 @@ public class GoblinController : MonoBehaviour
         if (hit)
         {
             _move = 1;
+            _player = hit.transform;
             _state = State.Chasing;
         }
     }
@@ -151,19 +155,20 @@ public class GoblinController : MonoBehaviour
 
     #endregion
 
-
     #region Goblin State
 
     private void Chasing()
     {
+        AttackRaycast();
+
         // Check goblin move with scale
-        if (_player.transform.position.x < transform.position.x)
+        if (_player.transform.position.x <= transform.position.x)
         {
             var x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
             transform.localScale = new Vector3(-2.5f, 2.2f);
         }
-        if (_player.transform.position.x > transform.position.x)
+        if (_player.transform.position.x >= transform.position.x)
         {
             var x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
@@ -173,6 +178,7 @@ public class GoblinController : MonoBehaviour
 
     private void Patrol()
     {
+        PlayerDetection();
         float x;
 
         if (transform.localScale.x < 0)
@@ -199,7 +205,7 @@ public class GoblinController : MonoBehaviour
     {
         _move = 0;
         _waitingDelay -= Time.deltaTime;
-        if (_waitingDelay == 0)
+        if (_waitingDelay <= 0)
         {
             if (transform.localScale.x < 0)
             {
@@ -215,10 +221,26 @@ public class GoblinController : MonoBehaviour
         }
     }
 
+    private void Attack()
+    {
+        var distance = Vector3.Distance(_player.position, transform.position);
+        
+        if (distance >= _attackRange)
+        {
+            _move = 1;
+            _state = State.Chasing;
+        }
+    }
+
     #endregion
 
     public void SetDieAnimation()
     {
         _state = State.Death;
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
     }
 }

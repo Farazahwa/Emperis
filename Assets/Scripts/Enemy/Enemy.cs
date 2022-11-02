@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class KingGoblinController : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private float _speed = 5f;
 
     [SerializeField]
-    private float _attackRange = 1f;
+    private float _detectRange;
 
     [SerializeField]
-    private float _distractRange = 1.5f;
+    private float _attackRange;
 
     [SerializeField]
     private LayerMask _layerMask;
@@ -31,6 +30,7 @@ public class KingGoblinController : MonoBehaviour
         Attacking,
         Death
     }
+
     enum Animation
     {
         Idle,
@@ -48,6 +48,7 @@ public class KingGoblinController : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
     private Transform _player;
+    private Transform _scaleTransform;
 
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
@@ -55,6 +56,7 @@ public class KingGoblinController : MonoBehaviour
     private State _state;
 
     #endregion
+
 
     void Awake()
     {
@@ -65,16 +67,16 @@ public class KingGoblinController : MonoBehaviour
     private void Start()
     {
         _state = State.Patrolling;
-
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        PlayerDetection();
-        AttackRaycast();
-
         switch (_state)
         {
+            case State.Waiting:
+                AnimationControl(Animation.Idle);
+                Waiting();
+                break;
             case State.Patrolling:
                 AnimationControl(Animation.Move);
                 Patrol();
@@ -83,12 +85,9 @@ public class KingGoblinController : MonoBehaviour
                 AnimationControl(Animation.Move);
                 Chasing();
                 break;
-            case State.Waiting:
-                AnimationControl(Animation.Idle);
-                Waiting();
-                break;
             case State.Attacking:
                 AnimationControl(Animation.Attack);
+                Attack();
                 break;
             case State.Death:
                 AnimationControl(Animation.Die);
@@ -113,10 +112,9 @@ public class KingGoblinController : MonoBehaviour
                 _anim.SetTrigger("Die");
                 break;
         }
-
     }
 
-    #region Raycast 
+    #region Raycast
 
     void DrawRay(Vector3 start, Vector3 dir, Color color)
     {
@@ -125,14 +123,17 @@ public class KingGoblinController : MonoBehaviour
 
     private void PlayerDetection()
     {
-        _raycastPosition = transform.position - new Vector3(0, 0.3f, 0);
+        _raycastPosition = transform.position;
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
         if (transform.localScale.x < 0) _raycastDirection = -transform.right;
 
-        DrawRay(_raycastPosition, _raycastDirection * _distractRange, Color.green);
-        RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _distractRange, _layerMask);
+
+        DrawRay(_raycastPosition, _raycastDirection * _detectRange, Color.green);
+        RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _detectRange, _layerMask);
         if (hit)
         {
+            _move = 1;
+            _player = hit.transform;
             _state = State.Chasing;
         }
     }
@@ -155,61 +156,67 @@ public class KingGoblinController : MonoBehaviour
 
     #endregion
 
-    #region King Goblin State
+    #region Goblin State
 
-    private void Patrol()
+    protected virtual void Chasing()
     {
+        Debug.Log("Chase");
+        AttackRaycast();
+
+        if (_player.transform.position.x <= transform.position.x)
+        {
+            var x = _move * _speed * -1;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(_scaleTransform.localScale.x * -1, _scaleTransform.localScale.y);
+        }
+        if (_player.transform.position.x >= transform.position.x)
+        {
+            var x = _move * _speed;
+            _rb.velocity = new Vector3(x, _rb.velocity.y);
+            transform.localScale = new Vector3(_scaleTransform.localScale.x, _scaleTransform.localScale.y);
+        }
+    }
+
+    protected virtual void Patrol()
+    {
+        PlayerDetection();
         float x;
+
         if (transform.localScale.x < 0)
-        {   
+        {
             x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(-2.6f, 2.6f);
+            transform.localScale = new Vector3(_scaleTransform.localScale.x * -1, _scaleTransform.localScale.y);
         }
-
         if (transform.localScale.x > 0)
         {
             x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(2.6f, 2.6f); 
+            transform.localScale = new Vector3(_scaleTransform.localScale.x, _scaleTransform.localScale.y);
         }
 
         if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
         {
-            _targetIndex = (_targetIndex + 1) % _pointer.Count;
+            Debug.Log("Wait");
+            _targetIndex = (_targetIndex + 1) % 2;
             _state = State.Waiting;
         }
     }
 
-    private void Chasing()
+    protected virtual void Waiting()
     {
-        if (_player.transform.position.x < transform.position.x)
-        {
-            var x = _move * _speed * -1;
-            _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(-2.6f, 2.6f);
-        }
-        if (_player.transform.position.x > transform.position.x)
-        {
-            var x = _move * _speed;
-            _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(2.6f, 2.6f);
-        }
-    }
-
-    private void Waiting()
-    {
+        Debug.Log("Wait");
         _move = 0;
         _waitingDelay -= Time.deltaTime;
         if (_waitingDelay <= 0)
         {
             if (transform.localScale.x < 0)
             {
-                transform.localScale = new Vector3(2.6f, 2.6f);
+                transform.localScale = new Vector3(2.5f, 2.2f);
             }
             else
             {
-                transform.localScale = new Vector3(-2.6f, 2.6f);
+                transform.localScale = new Vector3(-2.5f, 2.2f);
             }
             _move = 1;
             _waitingDelay = 2f;
@@ -217,19 +224,18 @@ public class KingGoblinController : MonoBehaviour
         }
     }
 
-    #endregion
-
-    #region Etc
-
-    public void SetDieAnimation()
+    protected virtual void Attack()
     {
-        _state = State.Death;
+        Debug.Log("Attack");
+        var distance = Vector3.Distance(_player.position, transform.position);
+
+        if (distance >= _attackRange)
+        {
+            _move = 1;
+            _state = State.Chasing;
+        }
     }
 
-    private void AttackPlayer()
-    {
-        Debug.Log("Player Get Hit by King Goblin");
-    }
-
     #endregion
+
 }
