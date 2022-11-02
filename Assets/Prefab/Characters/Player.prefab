@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3984913099893097655}
   - component: {fileID: 1656623871755751991}
   - component: {fileID: 2133654070693466399}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -107,6 +107,18 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
+  _maxHealth: 100
+  _currentHealth: 0
+  _playerHealthBar: {fileID: 0}
+  strength: 16
+  delay: 0.15
+  thrust: 1
+  OnBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDone:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8013540755127995006
 MonoBehaviour:
   m_ObjectHideFlags: 0

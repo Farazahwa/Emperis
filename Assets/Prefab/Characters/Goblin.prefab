@@ -174,4 +174,6 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 128
-  _pointer: []
+  _pointer:
+  - {fileID: 0}
+  - {fileID: 0}
