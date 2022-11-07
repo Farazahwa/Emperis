@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
     private Transform _player;
-    private Transform _scaleTransform;
+    protected virtual Vector3 Scale { get; }
 
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
@@ -167,13 +167,13 @@ public class Enemy : MonoBehaviour
         {
             var x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x * -1, _scaleTransform.localScale.y);
+            transform.localScale = Scale * new Vector2(-1, 1);
         }
         if (_player.transform.position.x >= transform.position.x)
         {
             var x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x, _scaleTransform.localScale.y);
+            transform.localScale = Scale * new Vector2(-1, 1);
         }
     }
 
@@ -186,15 +186,16 @@ public class Enemy : MonoBehaviour
         {
             x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x * -1, _scaleTransform.localScale.y);
+            transform.localScale = new Vector3(-2.5f, 2.2f);
         }
         if (transform.localScale.x > 0)
         {
             x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x, _scaleTransform.localScale.y);
+            transform.localScale = new Vector3(2.5f, 2.2f);
         }
 
+        Debug.Log(Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f);
         if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
         {
             Debug.Log("Wait");

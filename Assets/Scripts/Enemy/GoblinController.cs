@@ -181,6 +181,11 @@ public class GoblinController : MonoBehaviour
         PlayerDetection();
         float x;
 
+        if (_pointer[_targetIndex] == null)
+        {
+            return;
+        }
+
         if (transform.localScale.x < 0)
         {
             x = _move * _speed * -1;
