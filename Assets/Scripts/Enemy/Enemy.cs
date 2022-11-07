@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour
     private float _speed = 5f;
 
     [SerializeField]
+    protected float _health;
+
+    [SerializeField]
     private float _detectRange;
 
     [SerializeField]
@@ -22,7 +25,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _waitingDelay = 2f;
 
-    enum State
+    [SerializeField]
+    private float _attackDelay = 3f;
+
+    protected enum State
     {
         Waiting,
         Patrolling,
@@ -42,18 +48,20 @@ public class Enemy : MonoBehaviour
     #region private instance variable
 
     private float _move = 1f;
+    private float _waitingTime;
+    private float _attackTime;
 
     private int _targetIndex = 0;
 
     private Rigidbody2D _rb;
     private Animator _anim;
     private Transform _player;
-    protected virtual Vector3 Scale { get; }
+    protected virtual Vector3 Scale { get; set; }
 
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
 
-    private State _state;
+    protected State _state;
 
     #endregion
 
@@ -67,6 +75,9 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _state = State.Patrolling;
+
+        _waitingTime = _waitingDelay;
+        _attackTime = _attackDelay;
     }
 
     void Update()
@@ -86,7 +97,6 @@ public class Enemy : MonoBehaviour
                 Chasing();
                 break;
             case State.Attacking:
-                AnimationControl(Animation.Attack);
                 Attack();
                 break;
             case State.Death:
@@ -160,20 +170,25 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Chasing()
     {
-        Debug.Log("Chase");
         AttackRaycast();
 
         if (_player.transform.position.x <= transform.position.x)
         {
             var x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = Scale * new Vector2(-1, 1);
+            if (transform.localScale.x > 0)
+            {
+                Flip();
+            }
         }
         if (_player.transform.position.x >= transform.position.x)
         {
             var x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = Scale * new Vector2(-1, 1);
+            if (transform.localScale.x < 0)
+            {
+                Flip();
+            }
         }
     }
 
@@ -181,24 +196,25 @@ public class Enemy : MonoBehaviour
     {
         PlayerDetection();
         float x;
+        if (_pointer[_targetIndex] == null)
+        {
+            return;
+        }
 
         if (transform.localScale.x < 0)
         {
             x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(-2.5f, 2.2f);
         }
-        if (transform.localScale.x > 0)
+        else
         {
             x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(2.5f, 2.2f);
         }
 
-        Debug.Log(Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f);
+
         if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
         {
-            Debug.Log("Wait");
             _targetIndex = (_targetIndex + 1) % 2;
             _state = State.Waiting;
         }
@@ -206,34 +222,56 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Waiting()
     {
-        Debug.Log("Wait");
         _move = 0;
         _waitingDelay -= Time.deltaTime;
         if (_waitingDelay <= 0)
         {
-            if (transform.localScale.x < 0)
-            {
-                transform.localScale = new Vector3(2.5f, 2.2f);
-            }
-            else
-            {
-                transform.localScale = new Vector3(-2.5f, 2.2f);
-            }
+            Flip();
             _move = 1;
-            _waitingDelay = 2f;
+            _waitingDelay = _waitingTime;
             _state = State.Patrolling;
         }
     }
 
     protected virtual void Attack()
     {
-        Debug.Log("Attack");
         var distance = Vector3.Distance(_player.position, transform.position);
+        _attackDelay -= Time.deltaTime;
 
         if (distance >= _attackRange)
         {
             _move = 1;
             _state = State.Chasing;
+        }
+
+        AnimationControl(Animation.Idle);
+        if (_attackDelay <= 0)
+        {
+            AnimationControl(Animation.Attack);
+            _attackDelay = _attackTime;
+        }
+    }
+
+    protected virtual void Death()
+    {
+        Destroy(this.gameObject);
+    }
+    #endregion
+
+    #region Helper Method
+
+    private void Flip()
+    {
+        transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
+    }
+
+    public void Hit()
+    {
+        Debug.Log(_health);
+        _health -= 1;
+        if (_health <= 0)
+        {
+            _state = State.Death;
         }
     }
 

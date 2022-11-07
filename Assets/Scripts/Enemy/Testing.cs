@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Testing : Enemy
 {
-    protected override Vector3 Scale { get => new(2.2f, 2.2f); }
+    protected override Vector3 Scale { get => new(2.6f, 2.2f); }
+    
 }

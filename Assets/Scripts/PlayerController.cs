@@ -195,15 +195,23 @@ public class PlayerController : MonoBehaviour
         {
             var goblin = hit.collider.gameObject.GetComponent<GoblinController>();
             var kingGoblin = hit.collider.gameObject.GetComponent<KingGoblinController>();
+            var tester = hit.collider.gameObject.GetComponent<Testing>();
             if (_attack)
             {
                 if (goblin != null)
-                    goblin.SetDieAnimation();
+                    goblin.Hit();
 
                 if (kingGoblin != null)
                 {
-                    kingGoblin.SetDieAnimation();
+                    kingGoblin.Hit();
                 }
+
+                if (tester != null)
+                {
+                    tester.Hit();
+                }
+
+                _attack = false;
             }
         }
     }
