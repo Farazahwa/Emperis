@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 
     #region private instance variable
 
-    private float _move = 1f;
+    protected float _move = 1f;
     private float _waitingTime;
     private float _attackTime;
 
@@ -235,20 +235,21 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Attack()
     {
+        AnimationControl(Animation.Idle);
         var distance = Vector3.Distance(_player.position, transform.position);
         _attackDelay -= Time.deltaTime;
-
-        if (distance >= _attackRange)
-        {
-            _move = 1;
-            _state = State.Chasing;
-        }
-
-        AnimationControl(Animation.Idle);
+        Debug.Log(distance);
+        
         if (_attackDelay <= 0)
         {
             AnimationControl(Animation.Attack);
             _attackDelay = _attackTime;
+        }
+
+        if (distance > _attackRange)
+        {
+            _move = 1;
+            _state = State.Chasing;
         }
     }
 

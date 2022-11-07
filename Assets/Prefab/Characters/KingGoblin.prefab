@@ -121,15 +121,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+  _health: 5
+  _detectRange: 5
   _attackRange: 1.5
-  _distractRange: 5
   _layerMask:
     serializedVersion: 2
     m_Bits: 128
-  _player: {fileID: 8013540755127994994, guid: 9c97bd35285d3fe4590faf1bc6a54eb2, type: 3}
   _pointer:
   - {fileID: 0}
   - {fileID: 0}
+  _waitingDelay: 2
+  _attackDelay: 3
 --- !u!61 &7213784109880090921
 BoxCollider2D:
   m_ObjectHideFlags: 0
