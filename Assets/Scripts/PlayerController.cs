@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         AttackRaycast();    
 
         var move = _movement * _speed;
