@@ -11,6 +11,8 @@ TagManager:
   - Trap
   - Lava
   - Item
+  - Skull
+  - Ruby
   layers:
   - Default
   - TransparentFX
