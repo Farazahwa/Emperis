@@ -7,6 +7,9 @@ public class GoblinController : MonoBehaviour
     [SerializeField] 
     private float _speed = 5f;
 
+     [SerializeField] 
+    private float health = 2f;
+
     [SerializeField] 
     private float _detectRange;
 
@@ -241,7 +244,11 @@ public class GoblinController : MonoBehaviour
 
     public void SetDieAnimation()
     {
-        _state = State.Death;
+        health -= 1;
+        if (health == 0)
+        {
+            _state = State.Death;
+        }
     }
 
     public void Death()

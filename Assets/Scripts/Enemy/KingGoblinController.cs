@@ -110,6 +110,7 @@ public class KingGoblinController : MonoBehaviour
                 _anim.SetTrigger("Attack");
                 break;
             case Animation.Die:
+            Debug.Log("Mati");
                 _anim.SetTrigger("Die");
                 break;
         }
@@ -134,6 +135,7 @@ public class KingGoblinController : MonoBehaviour
         if (hit)
         {
             _state = State.Chasing;
+            _player = hit.transform;
         }
     }
 
@@ -220,11 +222,6 @@ public class KingGoblinController : MonoBehaviour
     #endregion
 
     #region Etc
-
-    public void SetDieAnimation()
-    {
-        _state = State.Death;
-    }
 
     private void AttackPlayer()
     {
