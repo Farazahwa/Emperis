@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2298650358272855081}
   - component: {fileID: 2918786094116213005}
   - component: {fileID: 7782641106428172830}
+  - component: {fileID: 7423244316858911846}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -105,3 +106,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7423244316858911846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655532222948286350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1909b2f9d49a4ac4589f0f8243c34257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
