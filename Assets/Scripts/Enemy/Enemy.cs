@@ -5,28 +5,28 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 5f;
+    protected float _speed = 5f;
 
     [SerializeField]
     protected float _health;
 
     [SerializeField]
-    private float _detectRange;
+    protected float _detectRange;
 
     [SerializeField]
-    private float _attackRange;
+    protected float _attackRange;
 
     [SerializeField]
     private LayerMask _layerMask;
 
     [SerializeField]
-    private List<GameObject> _pointer;
+    protected List<GameObject> _pointer;
 
     [SerializeField]
-    private float _waitingDelay = 2f;
+    protected float _waitingDelay = 2f;
 
     [SerializeField]
-    private float _attackDelay = 3f;
+    protected float _attackDelay = 3f;
 
     protected enum State
     {
@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         Death
     }
 
-    enum Animation
+    protected enum Animation
     {
         Idle,
         Move,
@@ -48,14 +48,14 @@ public class Enemy : MonoBehaviour
     #region private instance variable
 
     protected float _move = 1f;
-    private float _waitingTime;
-    private float _attackTime;
+    protected float _waitingTime;
+    protected float _attackTime;
 
-    private int _targetIndex = 0;
+    protected int _targetIndex = 0;
 
-    private Rigidbody2D _rb;
+    protected Rigidbody2D _rb;
     private Animator _anim;
-    private Transform _player;
+    protected Transform _player;
     protected virtual Vector3 Scale { get; set; }
 
     private Vector3 _raycastPosition;
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void AnimationControl(Animation animation)
+    protected void AnimationControl(Animation animation)
     {
         switch (animation)
         {
@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(start, dir, color);
     }
 
-    private void PlayerDetection()
+    protected void PlayerDetection()
     {
         _raycastPosition = transform.position;
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
@@ -148,7 +148,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void AttackRaycast()
+    protected void AttackRaycast()
     {
         _raycastPosition = transform.position - new Vector3(0, .5f, 0);
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
@@ -166,10 +166,12 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    #region Goblin State
+    #region State
 
     protected virtual void Chasing()
     {
+        // Chasing player corresponding each enemy behavior
+
         AttackRaycast();
 
         if (_player.transform.position.x <= transform.position.x)
@@ -194,8 +196,11 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Patrol()
     {
+        // Patroling
+
         PlayerDetection();
         float x;
+       
         if (_pointer[_targetIndex] == null)
         {
             return;
@@ -212,7 +217,6 @@ public class Enemy : MonoBehaviour
             _rb.velocity = new Vector3(x, _rb.velocity.y);
         }
 
-
         if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
         {
             _targetIndex = (_targetIndex + 1) % 2;
@@ -222,6 +226,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Waiting()
     {
+        // Stop in certain pointer
+
         _move = 0;
         _waitingDelay -= Time.deltaTime;
         if (_waitingDelay <= 0)
@@ -235,11 +241,12 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Attack()
     {
+        // Hit player
+
         AnimationControl(Animation.Idle);
         var distance = Vector3.Distance(_player.position, transform.position);
         _attackDelay -= Time.deltaTime;
-        Debug.Log(distance);
-        
+
         if (_attackDelay <= 0)
         {
             AnimationControl(Animation.Attack);
@@ -257,11 +264,12 @@ public class Enemy : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
     #endregion
 
     #region Helper Method
 
-    private void Flip()
+    protected void Flip()
     {
         transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
     }

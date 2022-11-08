@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WitchController : Enemy
 {
-    
-    
+    private void ShootFireball()
+    {
+        
+    }
 }
