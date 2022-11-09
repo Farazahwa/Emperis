@@ -161,6 +161,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Trap"))
         {
             TakeDamage(7);
+            if (_currentHealth <= 0)
+            {
+              Die();
+            }
         }
 
         if (other.gameObject.CompareTag("Lava"))
