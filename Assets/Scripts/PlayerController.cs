@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
         _currentHealth = _maxHealth;
         _playerHealthBar.setMaxHealth(_maxHealth);
         anim = GetComponent<Animator>();
+
+        Time.timeScale = 1;
+        Debug.Log("Game Start");
     }
 
     void FixedUpdate()
