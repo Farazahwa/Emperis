@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
     [SerializeField]
     protected float _speed = 5f;
 
@@ -28,12 +29,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected float _attackDelay = 3f;
 
+    public int damage;
+
     protected enum State
     {
-        Waiting,
-        Patrolling,
-        Chasing,
-        Attacking,
+        Wait,
+        Patrol,
+        Chase,
+        Attack,
         Death
     }
 
@@ -54,9 +57,10 @@ public class Enemy : MonoBehaviour
     protected int _targetIndex = 0;
 
     protected Rigidbody2D _rb;
-    private Animator _anim;
+    protected Animator _anim;
     protected Transform _player;
-    protected virtual Vector3 Scale { get; set; }
+    
+    protected virtual float Tolerance { get; }
 
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
@@ -74,7 +78,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _state = State.Patrolling;
+        _state = State.Patrol;
 
         _waitingTime = _waitingDelay;
         _attackTime = _attackDelay;
@@ -84,19 +88,28 @@ public class Enemy : MonoBehaviour
     {
         switch (_state)
         {
-            case State.Waiting:
+            case State.Wait:
+                PlayerDetection();
                 AnimationControl(Animation.Idle);
                 Waiting();
                 break;
-            case State.Patrolling:
+            case State.Patrol:
+                PlayerDetection();
+
+                if (_pointer[_targetIndex] == null)
+                {
+                    _state = State.Wait;
+                    break;
+                }
                 AnimationControl(Animation.Move);
                 Patrol();
                 break;
-            case State.Chasing:
+            case State.Chase:
+                AttackRaycast();
                 AnimationControl(Animation.Move);
                 Chasing();
                 break;
-            case State.Attacking:
+            case State.Attack:
                 Attack();
                 break;
             case State.Death:
@@ -144,7 +157,7 @@ public class Enemy : MonoBehaviour
         {
             _move = 1;
             _player = hit.transform;
-            _state = State.Chasing;
+            _state = State.Chase;
         }
     }
 
@@ -160,7 +173,7 @@ public class Enemy : MonoBehaviour
         if (hit)
         {
             _move = 0;
-            _state = State.Attacking;
+            _state = State.Attack;
         }
     }
 
@@ -172,8 +185,7 @@ public class Enemy : MonoBehaviour
     {
         // Chasing player corresponding each enemy behavior
 
-        AttackRaycast();
-
+        _move = 1;
         if (_player.transform.position.x <= transform.position.x)
         {
             var x = _move * _speed * -1;
@@ -197,15 +209,8 @@ public class Enemy : MonoBehaviour
     protected virtual void Patrol()
     {
         // Patroling
-
-        PlayerDetection();
+        
         float x;
-       
-        if (_pointer[_targetIndex] == null)
-        {
-            return;
-        }
-
         if (transform.localScale.x < 0)
         {
             x = _move * _speed * -1;
@@ -220,7 +225,7 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
         {
             _targetIndex = (_targetIndex + 1) % 2;
-            _state = State.Waiting;
+            _state = State.Wait;
         }
     }
 
@@ -235,7 +240,7 @@ public class Enemy : MonoBehaviour
             Flip();
             _move = 1;
             _waitingDelay = _waitingTime;
-            _state = State.Patrolling;
+            _state = State.Patrol;
         }
     }
 
@@ -245,6 +250,8 @@ public class Enemy : MonoBehaviour
 
         AnimationControl(Animation.Idle);
         var distance = Vector3.Distance(_player.position, transform.position);
+        var range = _attackRange + Tolerance;
+        Debug.Log(distance + "," + range);
         _attackDelay -= Time.deltaTime;
 
         if (_attackDelay <= 0)
@@ -253,10 +260,10 @@ public class Enemy : MonoBehaviour
             _attackDelay = _attackTime;
         }
 
-        if (distance > _attackRange)
+        if (distance > range)
         {
             _move = 1;
-            _state = State.Chasing;
+            _state = State.Chase;
         }
     }
 
@@ -276,12 +283,17 @@ public class Enemy : MonoBehaviour
 
     public void Hit()
     {
-        Debug.Log(_health);
         _health -= 1;
         if (_health <= 0)
         {
             _state = State.Death;
         }
+    }
+
+    protected void HitPlayer()
+    {
+        var player = _player.GetComponent<PlayerController>();
+        player.TakeDamage(damage);
     }
 
     #endregion

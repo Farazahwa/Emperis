@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 10
   m_Sprite: {fileID: -2132770894, guid: 5be005dd9570bbf4d95eaab4374ac959, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495526b7b11148245ae8c2961ac01d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 2
   _health: 4
   _detectRange: 8
   _attackRange: 5
@@ -132,6 +132,8 @@ MonoBehaviour:
   - {fileID: 0}
   _waitingDelay: 2
   _attackDelay: 3
+  damage: 5
+  _fireball: {fileID: 4768688130601241413, guid: 3d37e71a4ad7ed2408975f39ef384853, type: 3}
 --- !u!50 &7075960370727895985
 Rigidbody2D:
   serializedVersion: 4

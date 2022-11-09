@@ -179,3 +179,4 @@ MonoBehaviour:
   - {fileID: 0}
   _waitingDelay: 2
   _attackDelay: 3
+  damage: 3

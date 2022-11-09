@@ -132,6 +132,7 @@ MonoBehaviour:
   - {fileID: 0}
   _waitingDelay: 2
   _attackDelay: 3
+  damage: 8
 --- !u!61 &7213784109880090921
 BoxCollider2D:
   m_ObjectHideFlags: 0
