@@ -10,10 +10,6 @@ public class ItemCollector : MonoBehaviour
   [SerializeField] private TextMeshProUGUI SkullItem;
   [SerializeField] private TextMeshProUGUI RubyItem;
 
-  void Start(){
-      SkullItem.text = " " + skull;
-      RubyItem.text = " " + ruby;
-  }
 
   private void OnTriggerEnter2D(Collider2D collision)
   {
