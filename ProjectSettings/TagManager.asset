@@ -10,6 +10,9 @@ TagManager:
   - King Goblin
   - Trap
   - Lava
+  - Item
+  - Skull
+  - Ruby
   layers:
   - Default
   - TransparentFX

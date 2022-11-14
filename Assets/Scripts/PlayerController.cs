@@ -51,10 +51,14 @@ public class PlayerController : MonoBehaviour
         _currentHealth = _maxHealth;
         _playerHealthBar.setMaxHealth(_maxHealth);
         anim = GetComponent<Animator>();
+
+        Time.timeScale = 1;
+        Debug.Log("Game Start");
     }
 
     void FixedUpdate()
     {
+        
         AttackRaycast();    
 
         var move = _movement * _speed;
@@ -157,6 +161,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Trap"))
         {
             TakeDamage(7);
+            if (_currentHealth <= 0)
+            {
+              Die();
+            }
         }
 
         if (other.gameObject.CompareTag("Lava"))
@@ -195,15 +203,23 @@ public class PlayerController : MonoBehaviour
         {
             var goblin = hit.collider.gameObject.GetComponent<GoblinController>();
             var kingGoblin = hit.collider.gameObject.GetComponent<KingGoblinController>();
+            var tester = hit.collider.gameObject.GetComponent<Testing>();
             if (_attack)
             {
                 if (goblin != null)
-                    goblin.SetDieAnimation();
+                    goblin.Hit();
 
                 if (kingGoblin != null)
                 {
-                    kingGoblin.SetDieAnimation();
+                    kingGoblin.Hit();
                 }
+
+                if (tester != null)
+                {
+                    tester.Hit();
+                }
+
+                _attack = false;
             }
         }
     }

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _player: {fileID: 8013540755127994994, guid: 9c97bd35285d3fe4590faf1bc6a54eb2, type: 3}
+  _health: 3
   _detectRange: 5
   _attackRange: 1.3
   _layerMask:
@@ -177,3 +177,6 @@ MonoBehaviour:
   _pointer:
   - {fileID: 0}
   - {fileID: 0}
+  _waitingDelay: 2
+  _attackDelay: 3
+  damage: 3

@@ -4,34 +4,43 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 5f;
 
     [SerializeField]
-    private float _detectRange;
+    protected float _speed = 5f;
 
     [SerializeField]
-    private float _attackRange;
+    protected float _health;
+
+    [SerializeField]
+    protected float _detectRange;
+
+    [SerializeField]
+    protected float _attackRange;
 
     [SerializeField]
     private LayerMask _layerMask;
 
     [SerializeField]
-    private List<GameObject> _pointer;
+    protected List<GameObject> _pointer;
 
     [SerializeField]
-    private float _waitingDelay = 2f;
+    protected float _waitingDelay = 2f;
 
-    enum State
+    [SerializeField]
+    protected float _attackDelay = 3f;
+
+    public int damage;
+
+    protected enum State
     {
-        Waiting,
-        Patrolling,
-        Chasing,
-        Attacking,
+        Wait,
+        Patrol,
+        Chase,
+        Attack,
         Death
     }
 
-    enum Animation
+    protected enum Animation
     {
         Idle,
         Move,
@@ -41,19 +50,22 @@ public class Enemy : MonoBehaviour
 
     #region private instance variable
 
-    private float _move = 1f;
+    protected float _move = 1f;
+    protected float _waitingTime;
+    protected float _attackTime;
 
-    private int _targetIndex = 0;
+    protected int _targetIndex = 0;
 
-    private Rigidbody2D _rb;
-    private Animator _anim;
-    private Transform _player;
-    private Transform _scaleTransform;
+    protected Rigidbody2D _rb;
+    protected Animator _anim;
+    protected Transform _player;
+    
+    protected virtual float Tolerance { get; }
 
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
 
-    private State _state;
+    protected State _state;
 
     #endregion
 
@@ -66,27 +78,38 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _state = State.Patrolling;
+        _state = State.Patrol;
+
+        _waitingTime = _waitingDelay;
+        _attackTime = _attackDelay;
     }
 
     void Update()
     {
         switch (_state)
         {
-            case State.Waiting:
+            case State.Wait:
+                PlayerDetection();
                 AnimationControl(Animation.Idle);
                 Waiting();
                 break;
-            case State.Patrolling:
+            case State.Patrol:
+                PlayerDetection();
+
+                if (_pointer[_targetIndex] == null)
+                {
+                    _state = State.Wait;
+                    break;
+                }
                 AnimationControl(Animation.Move);
                 Patrol();
                 break;
-            case State.Chasing:
+            case State.Chase:
+                AttackRaycast();
                 AnimationControl(Animation.Move);
                 Chasing();
                 break;
-            case State.Attacking:
-                AnimationControl(Animation.Attack);
+            case State.Attack:
                 Attack();
                 break;
             case State.Death:
@@ -95,7 +118,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void AnimationControl(Animation animation)
+    protected void AnimationControl(Animation animation)
     {
         switch (animation)
         {
@@ -121,7 +144,7 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(start, dir, color);
     }
 
-    private void PlayerDetection()
+    protected void PlayerDetection()
     {
         _raycastPosition = transform.position;
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
@@ -134,11 +157,11 @@ public class Enemy : MonoBehaviour
         {
             _move = 1;
             _player = hit.transform;
-            _state = State.Chasing;
+            _state = State.Chase;
         }
     }
 
-    private void AttackRaycast()
+    protected void AttackRaycast()
     {
         _raycastPosition = transform.position - new Vector3(0, .5f, 0);
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
@@ -150,90 +173,127 @@ public class Enemy : MonoBehaviour
         if (hit)
         {
             _move = 0;
-            _state = State.Attacking;
+            _state = State.Attack;
         }
     }
 
     #endregion
 
-    #region Goblin State
+    #region State
 
     protected virtual void Chasing()
     {
-        Debug.Log("Chase");
-        AttackRaycast();
+        // Chasing player corresponding each enemy behavior
 
+        _move = 1;
         if (_player.transform.position.x <= transform.position.x)
         {
             var x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x * -1, _scaleTransform.localScale.y);
+            if (transform.localScale.x > 0)
+            {
+                Flip();
+            }
         }
         if (_player.transform.position.x >= transform.position.x)
         {
             var x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x, _scaleTransform.localScale.y);
+            if (transform.localScale.x < 0)
+            {
+                Flip();
+            }
         }
     }
 
     protected virtual void Patrol()
     {
-        PlayerDetection();
+        // Patroling
+        
         float x;
-
         if (transform.localScale.x < 0)
         {
             x = _move * _speed * -1;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x * -1, _scaleTransform.localScale.y);
         }
-        if (transform.localScale.x > 0)
+        else
         {
             x = _move * _speed;
             _rb.velocity = new Vector3(x, _rb.velocity.y);
-            transform.localScale = new Vector3(_scaleTransform.localScale.x, _scaleTransform.localScale.y);
         }
 
         if (Vector3.Distance(transform.position, _pointer[_targetIndex].transform.position) <= .9f)
         {
-            Debug.Log("Wait");
             _targetIndex = (_targetIndex + 1) % 2;
-            _state = State.Waiting;
+            _state = State.Wait;
         }
     }
 
     protected virtual void Waiting()
     {
-        Debug.Log("Wait");
+        // Stop in certain pointer
+
         _move = 0;
         _waitingDelay -= Time.deltaTime;
         if (_waitingDelay <= 0)
         {
-            if (transform.localScale.x < 0)
-            {
-                transform.localScale = new Vector3(2.5f, 2.2f);
-            }
-            else
-            {
-                transform.localScale = new Vector3(-2.5f, 2.2f);
-            }
+            Flip();
             _move = 1;
-            _waitingDelay = 2f;
-            _state = State.Patrolling;
+            _waitingDelay = _waitingTime;
+            _state = State.Patrol;
         }
     }
 
     protected virtual void Attack()
     {
-        Debug.Log("Attack");
-        var distance = Vector3.Distance(_player.position, transform.position);
+        // Hit player
 
-        if (distance >= _attackRange)
+        AnimationControl(Animation.Idle);
+        var distance = Vector3.Distance(_player.position, transform.position);
+        var range = _attackRange + Tolerance;
+        Debug.Log(distance + "," + range);
+        _attackDelay -= Time.deltaTime;
+
+        if (_attackDelay <= 0)
+        {
+            AnimationControl(Animation.Attack);
+            _attackDelay = _attackTime;
+        }
+
+        if (distance > range)
         {
             _move = 1;
-            _state = State.Chasing;
+            _state = State.Chase;
         }
+    }
+
+    protected virtual void Death()
+    {
+        Destroy(this.gameObject);
+    }
+
+    #endregion
+
+    #region Helper Method
+
+    protected void Flip()
+    {
+        transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
+    }
+
+    public void Hit()
+    {
+        _health -= 1;
+        if (_health <= 0)
+        {
+            _state = State.Death;
+        }
+    }
+
+    protected void HitPlayer()
+    {
+        var player = _player.GetComponent<PlayerController>();
+        player.TakeDamage(damage);
     }
 
     #endregion

@@ -2,88 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WitchController : MonoBehaviour
+public class WitchController : Enemy
 {
-
     [SerializeField]
-    private float _distractRange;
+    private FireballController _fireball;
 
-    [SerializeField]
-    private float _attackRange;
+    protected override float Tolerance => .4f;
 
-    [SerializeField]
-    private GameObject _player;
-
-    [SerializeField]
-    private LayerMask _layerMask;
-
-    private bool _distract = false;
-    private Rigidbody2D _rb;
-    private Animator _anim;
-
-    private Vector3 _raycastPosition;
-    private Vector3 _raycastDirection;
-
-    void Awake()
+    private void ShootFireball()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _anim = GetComponent<Animator>();
-    }
-
-    void FixedUpdate()
-    {
-        PlayerDetection();
-        AttackRaycast();
-
-        if (_distract)
+        Vector3 fireballPosition;
+        if (transform.localScale.x > 0)
         {
-            if (_player.transform.position.x > transform.position.x)
-            {
-                transform.localScale = new Vector3(-5f, 5f);
-            }
-            if (_player.transform.position.x < transform.position.x)
-            {
-                transform.localScale = new Vector3(5f, 5f);
-            }
-            _distract = true;
+            fireballPosition = transform.position + new Vector3(.5f, .1f);
         }
-    }
-
-    #region Raycast
-
-    void DrawRay(Vector3 start, Vector3 dir, Color color)
-    {
-        Debug.DrawRay(start, dir, color);
-    }
-
-    private void PlayerDetection()
-    {
-        _raycastPosition = transform.position - new Vector3(0, 0.3f, 0);
-        if (transform.localScale.x < 0) _raycastDirection = transform.right;
-        if (transform.localScale.x > 0) _raycastDirection = -transform.right;
-
-        DrawRay(_raycastPosition, _raycastDirection * _distractRange, Color.green);
-        RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _distractRange, _layerMask);
-        if (hit)
+        else
         {
-            _distract = true;
+            fireballPosition = transform.position + new Vector3(-.5f, .1f);
         }
+        var fireball = Instantiate(_fireball, fireballPosition, Quaternion.identity);
+        fireball.witch = this;
     }
-
-    private void AttackRaycast()
-    {
-        _raycastPosition = transform.position - new Vector3(0, .5f, 0);
-        if (transform.localScale.x < 0) _raycastDirection = transform.right;
-        if (transform.localScale.x > 0) _raycastDirection = -transform.right;
-
-
-        DrawRay(_raycastPosition, _raycastDirection * _attackRange, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _attackRange, _layerMask);
-        if (hit)
-        {
-            _anim.SetTrigger("Attack");
-        }
-    }
-
-    #endregion
 }
