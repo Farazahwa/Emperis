@@ -13,6 +13,7 @@ TagManager:
   - Item
   - Skull
   - Ruby
+  - Witch
   layers:
   - Default
   - TransparentFX

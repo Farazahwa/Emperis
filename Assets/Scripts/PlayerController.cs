@@ -27,18 +27,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerHealthBar _playerHealthBar;
 
-    //control how powerful the knockback(strength)
     [SerializeField]
-    private float strength = 16, delay = 0.15f;
+    private float _knockbackStrength;
 
-    private Rigidbody2D _rigidbody;
-    private float _movement;
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
+
+    private float _movement;
     private bool _attack;
     private bool _grounded = true;
+
+    private Rigidbody2D _rigidbody;
     private Animator _animator;
-    private Animator anim;
+    private Transform _enemyTransform;
 
     public float thrust = 1.0f;
 
@@ -50,10 +51,6 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _currentHealth = _maxHealth;
         _playerHealthBar.setMaxHealth(_maxHealth);
-        anim = GetComponent<Animator>();
-
-        Time.timeScale = 1;
-        Debug.Log("Game Start");
     }
 
     void FixedUpdate()
@@ -86,11 +83,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Transform enemyTransform)
     {
+        if (enemyTransform != null)
+        {
+            _enemyTransform = enemyTransform;
+        }
         _currentHealth -= damage;
-        _rigidbody.AddForce(new Vector3(0f, 0f, thrust), ForceMode2D.Impulse);
         _playerHealthBar.setHealth(_currentHealth);
+
     }
 
     #region Input System Controller
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTest(InputValue value)
     {
-        TakeDamage(20);
+        TakeDamage(20, null);
     }
 
     #endregion
@@ -160,7 +161,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Trap"))
         {
-            TakeDamage(7);
+            TakeDamage(7, null);
             if (_currentHealth <= 0)
             {
               Die();
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Lava"))
         {
-            TakeDamage(100);
+            TakeDamage(100, null);
             Die();
         }
 
@@ -177,7 +178,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        anim.SetTrigger("death");
+        _animator.SetTrigger("death");
     }
 
 
@@ -201,22 +202,26 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _attackRange, _layerMask);
         if (hit)
         {
-            var goblin = hit.collider.gameObject.GetComponent<GoblinController>();
-            var kingGoblin = hit.collider.gameObject.GetComponent<KingGoblinController>();
-            var tester = hit.collider.gameObject.GetComponent<Testing>();
+            var enemy = hit.collider.gameObject;
+
             if (_attack)
             {
-                if (goblin != null)
-                    goblin.Hit();
-
-                if (kingGoblin != null)
+                switch (enemy.tag)
                 {
-                    kingGoblin.Hit();
-                }
-
-                if (tester != null)
-                {
-                    tester.Hit();
+                    case "Goblin":
+                        var goblin = enemy.GetComponent<GoblinController>();
+                        goblin.Hitted();
+                        break;
+                    case "King Goblin":
+                        var kingGoblin = enemy.GetComponent<KingGoblinController>();
+                        kingGoblin.Hitted();
+                        break;
+                    case "Witch":
+                        var witch = enemy.GetComponent<WitchController>();
+                        witch.Hitted();
+                        break;
+                    default:
+                        break;
                 }
 
                 _attack = false;
@@ -226,29 +231,18 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region Feedback Enemy Object
+    private void Knockback()
+    {
+        if (transform.position.x > _enemyTransform.position.x)
+        {
+            Debug.Log("Enemy Left");
+            _rigidbody.AddForce(transform.right * 35f, ForceMode2D.Impulse);
+        }
+        else
+        {
+            Debug.Log("Enemy Right");
+            _rigidbody.AddForce(transform.right * -35f, ForceMode2D.Impulse);
+        }
+    }
 
-    //sender object to know direction should apply the snug back feedback
-    //if player attacks the enemy, we're going to calculate the direction from the player to the enemy
-    //public void PlayFeedback(GameObject sender)
-    //{
-    //    StopAllCoroutines();
-    //    OnBegin?.Invoke();
-    //    Vector2 direction = (transform.position-sender.transform.position).normalized;
-    //    _rigidbody.AddForce(direction*strength, ForceMode2D.Impulse); //will make player fly in the opposite direction
-    //    StartCoroutines(Reset());
-    //}
-
-    #endregion
-
-    #region Reset the KnockBack Feedback to Stop
-
-    // private IEnumerator Reset()
-    // {
-    //     yield return new WaitForSeconds(delay);
-    //     _rigidbody.velocity = Vector3.zero;
-    //     OnDone?.Invoke();
-    // }
-
-    #endregion
 }

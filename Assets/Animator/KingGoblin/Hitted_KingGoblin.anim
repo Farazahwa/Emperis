@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attacked_Goblin
+  m_Name: Hitted_KingGoblin
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 146187b53afb3ec4f8fb55f058400ecc, type: 3}
+      value: {fileID: -1940462928, guid: 8f6104b5d36c69a43b508499edc86309, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,7 +40,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 146187b53afb3ec4f8fb55f058400ecc, type: 3}
+    - {fileID: -1940462928, guid: 8f6104b5d36c69a43b508499edc86309, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

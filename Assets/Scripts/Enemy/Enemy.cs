@@ -45,7 +45,8 @@ public class Enemy : MonoBehaviour
         Idle,
         Move,
         Attack,
-        Die
+        Die,
+        Hitted
     }
 
     #region private instance variable
@@ -133,6 +134,9 @@ public class Enemy : MonoBehaviour
                 break;
             case Animation.Die:
                 _anim.SetTrigger("Die");
+                break;
+            case Animation.Hitted:
+                _anim.SetTrigger("Hit");
                 break;
         }
     }
@@ -251,7 +255,6 @@ public class Enemy : MonoBehaviour
         AnimationControl(Animation.Idle);
         var distance = Vector3.Distance(_player.position, transform.position);
         var range = _attackRange + Tolerance;
-        Debug.Log(distance + "," + range);
         _attackDelay -= Time.deltaTime;
 
         if (_attackDelay <= 0)
@@ -281,19 +284,34 @@ public class Enemy : MonoBehaviour
         transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
     }
 
-    public void Hit()
+    public void Hitted()
     {
         _health -= 1;
         if (_health <= 0)
         {
             _state = State.Death;
+            return;
+        }
+
+        AnimationControl(Animation.Hitted);
+    }
+    
+    protected void Knockback()
+    {
+        if (_player.position.x > transform.position.x)
+        {
+            _rb.AddForce(transform.right * -25f, ForceMode2D.Impulse);
+        }
+        else
+        {
+            _rb.AddForce(transform.right * 25f, ForceMode2D.Impulse);
         }
     }
 
     protected void HitPlayer()
     {
         var player = _player.GetComponent<PlayerController>();
-        player.TakeDamage(damage);
+        player.TakeDamage(damage, transform);
     }
 
     #endregion
