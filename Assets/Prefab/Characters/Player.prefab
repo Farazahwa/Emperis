@@ -110,8 +110,7 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 0
   _playerHealthBar: {fileID: 0}
-  strength: 16
-  delay: 0.15
+  _knockbackStrength: 35
   thrust: 1
   OnBegin:
     m_PersistentCalls:

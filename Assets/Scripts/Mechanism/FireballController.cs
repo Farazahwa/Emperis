@@ -83,7 +83,7 @@ public class FireballController : MonoBehaviour
         if (player != null)
         {
             _state = State.Destroy;
-            player.TakeDamage(witch.damage);
+            player.TakeDamage(witch.damage, null);
         }
     }
 }
