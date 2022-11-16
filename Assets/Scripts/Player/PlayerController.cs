@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     private bool _attack;
     private bool _grounded = true;
 
+    public GameOverScreen GameOverScreen;
+
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private Transform _enemyTransform;
@@ -104,8 +106,15 @@ public class PlayerController : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _animator.SetTrigger("Die");
+            Time.timeScale = 0;
+            GameOver();
         }
 
+    }
+
+    public void GameOver()
+    {
+        GameOverScreen.setup();
     }
 
     #region Input System Controller

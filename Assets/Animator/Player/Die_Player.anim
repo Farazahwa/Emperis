@@ -20,40 +20,20 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1753928048, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 0.14285715
-      value: {fileID: -208584446, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 0.2857143
-      value: {fileID: -425254512, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 0.42857143
-      value: {fileID: 417471414, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 0.5714286
-      value: {fileID: 260546190, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 0.71428573
-      value: {fileID: 1608050165, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 0.85714287
-      value: {fileID: 134632800, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 1
-      value: {fileID: -1622978590, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 1.1428572
-      value: {fileID: 641887873, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 1.2857143
-      value: {fileID: -1722363001, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 1.4285715
-      value: {fileID: 75740870, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 1.5714285
-      value: {fileID: -1615958718, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 1.7142857
-      value: {fileID: -1799745602, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 1.8571428
-      value: {fileID: 1106635540, guid: 265ba03877848244c98da777649add51, type: 3}
-    - time: 2
-      value: {fileID: 1106635540, guid: 265ba03877848244c98da777649add51, type: 3}
+      value: {fileID: -518965407, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - time: 0.125
+      value: {fileID: -363371412, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - time: 0.25
+      value: {fileID: -424008707, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - time: 0.375
+      value: {fileID: 342685003, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - time: 0.5
+      value: {fileID: 976230102, guid: a152f995618408145834786f0c4738e4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 7
+  m_SampleRate: 8
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -68,27 +48,17 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -1753928048, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: -208584446, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: -425254512, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 417471414, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 260546190, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 1608050165, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 134632800, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: -1622978590, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 641887873, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: -1722363001, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 75740870, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: -1615958718, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: -1799745602, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 1106635540, guid: 265ba03877848244c98da777649add51, type: 3}
-    - {fileID: 1106635540, guid: 265ba03877848244c98da777649add51, type: 3}
+    - {fileID: -518965407, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - {fileID: -363371412, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - {fileID: -424008707, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - {fileID: 342685003, guid: a152f995618408145834786f0c4738e4, type: 3}
+    - {fileID: 976230102, guid: a152f995618408145834786f0c4738e4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2.142857
+    m_StopTime: 0.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -108,7 +78,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.8571428
+  - time: 0.75
     functionName: Death
     data: 
     objectReferenceParameter: {fileID: 0}
