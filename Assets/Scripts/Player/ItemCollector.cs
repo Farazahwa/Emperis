@@ -13,18 +13,18 @@ public class ItemCollector : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D collision)
   {
-    if (collision.gameObject.CompareTag("Skull"))
-    {
-        Destroy(collision.gameObject);
-        skull++;
-        SkullItem.text = " " + skull;
-     }
+    var player = collision.GetComponent <PlayerController> ();
+     if (player !=null) 
+      {
 
-      if (collision.gameObject.CompareTag("Ruby"))
-    {
-        Destroy(collision.gameObject);
-        ruby++;
-        RubyItem.text = " " + ruby;
-     }
+ 
+      }
   }
-}
+
+   
+  }
+
+
+
+
+
