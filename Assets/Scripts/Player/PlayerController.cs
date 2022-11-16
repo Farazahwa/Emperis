@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] 
     private float _attackRange;
+
+    [SerializeField]
+    private float _knockbackStrength;
 
     [SerializeField]
     private LayerMask _layerMask;
@@ -28,12 +32,17 @@ public class PlayerController : MonoBehaviour
     private PlayerHealthBar _playerHealthBar;
 
     [SerializeField]
-    private float _knockbackStrength;
+    private TextMeshProUGUI _skullText;
+
+    [SerializeField]
+    private TextMeshProUGUI _rubyText;
 
     private Vector3 _raycastPosition;
     private Vector3 _raycastDirection;
 
     private float _movement;
+    private int _skull = 0;
+    private int _ruby = 0;
     private bool _attack;
     private bool _grounded = true;
 
@@ -184,6 +193,20 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Lava"))
         {
             TakeDamage(100, null);
+        }
+
+        if (other.gameObject.CompareTag("Ruby"))
+        {
+            Destroy(other.gameObject);
+            _ruby++;
+            _rubyText.text = " " + _ruby;
+        }
+
+        if (other.gameObject.CompareTag("Skull"))
+        {
+            Destroy(other.gameObject);
+            _skull++;
+            _skullText.text = " " + _skull;
         }
 
     }
