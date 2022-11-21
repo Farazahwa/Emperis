@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private float _knockbackStrength;
 
     [SerializeField]
-    private LayerMask _layerMask;
+    private List<LayerMask> _layerMask;
 
     [SerializeField]
     private int _maxHealth = 100;
@@ -37,16 +37,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _rubyText;
 
-    private Vector3 _raycastPosition;
-    private Vector3 _raycastDirection;
+    [SerializeField]
+    private GameOverScreen GameOverScreen;
 
     private float _movement;
-    private int _skull = 0;
-    private int _ruby = 0;
     private bool _attack;
-    private bool _grounded = true;
+    private bool _grounded = false;
 
-    public GameOverScreen GameOverScreen;
+    public int skull = 0;
+    public int ruby = 0;
 
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -129,15 +128,12 @@ public class PlayerController : MonoBehaviour
     // Input System Jump
     void OnJump(InputValue value)
     {
+        RaycastJump();
 
-        var distance = Vector3.Distance(new Vector3(0, transform.position.y), new Vector3(0, _rigidbody.velocity.y));
-        Debug.Log(distance);
-        Jump();
-
-        if (distance < 2.6f)
+        if (_grounded)
         {
-            _grounded = true;
-            Jump();
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jump);
+            _grounded = false;
         }
     }
 
@@ -164,16 +160,6 @@ public class PlayerController : MonoBehaviour
 
     #region Helper Method
 
-    // Helper Method for Input System Jump
-    private void Jump()
-    {
-        if (_grounded)
-        {
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jump);
-            _grounded = false;
-        }
-    }
-
     void Death()
     {
         Destroy(this.gameObject);
@@ -184,10 +170,6 @@ public class PlayerController : MonoBehaviour
     // Collision with other game object
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Grounded"))
-        {
-            _grounded = true;
-        }
 
         if (other.gameObject.CompareTag("Wall"))
         {
@@ -207,15 +189,15 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ruby"))
         {
             Destroy(other.gameObject);
-            _ruby++;
-            _rubyText.text = " " + _ruby;
+            ruby++;
+            _rubyText.text = " " + ruby;
         }
 
         if (other.gameObject.CompareTag("Skull"))
         {
             Destroy(other.gameObject);
-            _skull++;
-            _skullText.text = " " + _skull;
+            skull++;
+            _skullText.text = " " + skull;
         }
 
     }
@@ -230,12 +212,13 @@ public class PlayerController : MonoBehaviour
 
     private void AttackRaycast()
     {
-        _raycastPosition = transform.position;
-        if (_movement > 0) _raycastDirection = transform.right;
-        if (_movement < 0) _raycastDirection = -transform.right;
+        var pos = transform.position;
+        var dir = transform.right;
+        if (_movement > 0) dir = transform.right;
+        if (_movement < 0) dir = -transform.right;
 
-        DrawRay(_raycastPosition, _raycastDirection * _attackRange, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _attackRange, _layerMask);
+        DrawRay(pos, dir * _attackRange, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(pos, dir, _attackRange, _layerMask[0]);
         if (hit)
         {
             var enemy = hit.collider.gameObject;
@@ -262,6 +245,26 @@ public class PlayerController : MonoBehaviour
 
                 _attack = false;
             }
+        }
+    }
+
+    private void RaycastJump()
+    {
+        var pos = transform.position;
+        var dir = -transform.up;
+
+        DrawRay(pos, dir * 2, Color.white);
+        RaycastHit2D hit = Physics2D.Raycast(pos, dir, 2, _layerMask[1]);
+        if (hit)
+        {
+            if (hit.collider.gameObject.CompareTag("Grounded"))
+            {
+                _grounded = true;
+            }
+            else
+            {
+                _grounded = false;
+            }   
         }
     }
 

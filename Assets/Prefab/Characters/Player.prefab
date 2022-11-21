@@ -104,13 +104,18 @@ MonoBehaviour:
   _speed: 10
   _jump: 15
   _attackRange: 1.4
+  _knockbackStrength: 35
   _layerMask:
-    serializedVersion: 2
+  - serializedVersion: 2
     m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 256
   _maxHealth: 100
   _currentHealth: 0
   _playerHealthBar: {fileID: 0}
-  _knockbackStrength: 35
+  _skullText: {fileID: 0}
+  _rubyText: {fileID: 0}
+  GameOverScreen: {fileID: 0}
   thrust: 1
   OnBegin:
     m_PersistentCalls:

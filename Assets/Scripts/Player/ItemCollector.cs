@@ -5,10 +5,8 @@ using TMPro;
 
 public class ItemCollector : MonoBehaviour
 {
-    private int skull = 0;
-    private int ruby = 0;
-    [SerializeField] private TextMeshProUGUI SkullItem;
-    [SerializeField] private TextMeshProUGUI RubyItem;
+    [SerializeField]
+    private ItemCollectorMenu _itemCollector;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,7 +14,10 @@ public class ItemCollector : MonoBehaviour
     var player = collision.GetComponent <PlayerController> ();
         if (player !=null) 
         {
-
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                _itemCollector.PopUp();
+            }
         }
     }
 }
