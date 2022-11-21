@@ -5,25 +5,21 @@ using TMPro;
 
 public class ItemCollector : MonoBehaviour
 {
-  private int skull = 0;
-  private int ruby = 0;
-  [SerializeField] private TextMeshProUGUI SkullItem;
-  [SerializeField] private TextMeshProUGUI RubyItem;
+    private int skull = 0;
+    private int ruby = 0;
+    [SerializeField] private TextMeshProUGUI SkullItem;
+    [SerializeField] private TextMeshProUGUI RubyItem;
 
 
-  private void OnTriggerEnter2D(Collider2D collision)
-  {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
     var player = collision.GetComponent <PlayerController> ();
-     if (player !=null) 
-      {
+        if (player !=null) 
+        {
 
- 
-      }
-  }
-
-   
-  }
-
+        }
+    }
+}
 
 
 

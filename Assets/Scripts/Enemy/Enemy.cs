@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
-    private void Start()
+    void Start()
     {
         _state = State.Patrol;
 
@@ -248,9 +248,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hit the player
+    /// </summary>
     protected virtual void Attack()
     {
-        // Hit player
+        if (_attackDelay == _attackTime)
+        {
+            AnimationControl(Animation.Attack);
+        }
 
         AnimationControl(Animation.Idle);
         var distance = Vector3.Distance(_player.position, transform.position);
@@ -259,7 +265,6 @@ public class Enemy : MonoBehaviour
 
         if (_attackDelay <= 0)
         {
-            AnimationControl(Animation.Attack);
             _attackDelay = _attackTime;
         }
 
@@ -270,6 +275,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Death method : called when this gameObject death
+    /// </summary>
     protected virtual void Death()
     {
         Destroy(this.gameObject);
