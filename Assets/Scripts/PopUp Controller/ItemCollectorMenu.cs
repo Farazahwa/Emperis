@@ -9,13 +9,18 @@ public class ItemCollectorMenu : MonoBehaviour
     private PlayerController _player;
 
     [SerializeField]
-    private TextMeshProUGUI _text;
+    private TextMeshProUGUI _rubyText;
 
     [SerializeField]
-    private PortalController _portal;
+    private TextMeshProUGUI _skullText;
+
+    [SerializeField]
+    private GameObject _portal;
 
     public void PopUp()
     {
+        _rubyText.text = $"{_player.ruby}/10";
+        _skullText.text = $"{_player.skull}/10";
         gameObject.SetActive(true);
     }
 
@@ -26,8 +31,14 @@ public class ItemCollectorMenu : MonoBehaviour
 
     private void Collect()
     {
-        _player.ruby = 0;
-        _player.skull = 0;
-        _portal.gameObject.SetActive(true);
+        if (_player.ruby >= 10 & _player.skull >= 10)
+        {
+            _player.ruby = 0;
+            _player.skull = 0;
+            _portal.SetActive(true);
+        }
+        else {
+            return;
+        }
     }
 }
