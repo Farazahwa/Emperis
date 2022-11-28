@@ -14,7 +14,7 @@ public class Spawn : MonoBehaviour
 
     IEnumerator FireRain()
     {
-        for (int i = 0; i < 15; i++)
+        while (true)
         {
             yield return new WaitForSeconds(0.2f);
             var x = Random.Range(-10f, 11f);
