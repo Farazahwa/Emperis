@@ -170,7 +170,6 @@ public class PlayerController : MonoBehaviour
     // Collision with other game object
     void OnCollisionEnter2D(Collision2D other)
     {
-
         if (other.gameObject.CompareTag("Wall"))
         {
             _movement = 0;
@@ -185,21 +184,25 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(100, null);
         }
+    }
 
-        if (other.gameObject.CompareTag("Ruby"))
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.CompareTag("Ruby"))
         {
-            Destroy(other.gameObject);
+            Debug.Log("Ruby");
+            Destroy(col.gameObject);
             ruby++;
             _rubyText.text = " " + ruby;
         }
 
-        if (other.gameObject.CompareTag("Skull"))
+        if (col.gameObject.CompareTag("Skull"))
         {
-            Destroy(other.gameObject);
+            Destroy(col.gameObject);
             skull++;
             _skullText.text = " " + skull;
         }
-
     }
 
     #region Raycast
