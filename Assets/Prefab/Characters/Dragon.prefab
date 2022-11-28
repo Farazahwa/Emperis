@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 977284030690634588}
   - component: {fileID: 2643576346644058953}
   - component: {fileID: 6527972943027365420}
+  - component: {fileID: 1547249675614981287}
   m_Layer: 6
   m_Name: Dragon
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5968805321526823088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0876195, y: 0.28258795, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -7.4622984, y: 7.4622984, z: 0.49748653}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 114432859, guid: 73f55aa4a285b2f40ab55f123326c2f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,7 +121,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.039976224, y: -0.040077865}
+  m_Offset: {x: -0.03997624, y: -0.0046676397}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +132,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0205112, y: 1.1410877}
+  m_Size: {x: 1.0205112, y: 1.0702672}
   m_EdgeRadius: 0
 --- !u!50 &6527972943027365420
 Rigidbody2D:
@@ -153,4 +154,31 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &1547249675614981287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968805321526823088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10eb2077bcce2f4cad909042260b798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _health: 2000
+  _detectRange: 15
+  _attackRange: 15
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _pointer: []
+  _waitingDelay: 2
+  _attackDelay: 3
+  damage: 0
+  _dragonBreath: {fileID: 8429171473804748845, guid: c624a47532a1d3e4bb028794043b30b4, type: 3}
+  _fireRain: {fileID: 0}
+  _dragonBreathSpawner: {fileID: 0}
+  _fireRainSpawner: {fileID: 0}
