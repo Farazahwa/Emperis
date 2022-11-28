@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     protected float _attackRange;
 
     [SerializeField]
-    private LayerMask _layerMask;
+    protected LayerMask _layerMask;
 
     [SerializeField]
     protected List<GameObject> _pointer;
@@ -63,8 +63,8 @@ public class Enemy : MonoBehaviour
     
     protected virtual float Tolerance { get; }
 
-    private Vector3 _raycastPosition;
-    private Vector3 _raycastDirection;
+    protected Vector3 _raycastPosition;
+    protected Vector3 _raycastDirection;
 
     protected State _state;
 
@@ -143,17 +143,17 @@ public class Enemy : MonoBehaviour
 
     #region Raycast
 
-    void DrawRay(Vector3 start, Vector3 dir, Color color)
+    protected void DrawRay(Vector3 start, Vector3 dir, Color color)
     {
         Debug.DrawRay(start, dir, color);
     }
 
-    protected void PlayerDetection()
+    protected virtual void PlayerDetection()
     {
         _raycastPosition = transform.position;
         if (transform.localScale.x > 0) _raycastDirection = transform.right;
         if (transform.localScale.x < 0) _raycastDirection = -transform.right;
-
+        
 
         DrawRay(_raycastPosition, _raycastDirection * _detectRange, Color.green);
         RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, _raycastDirection, _detectRange, _layerMask);
