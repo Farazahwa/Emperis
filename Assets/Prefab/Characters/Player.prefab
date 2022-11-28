@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -1638009388, guid: 734bb81e72af76647875d6a7b1bc3ae4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -111,11 +111,14 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 256
   _maxHealth: 100
-  _currentHealth: 0
   _playerHealthBar: {fileID: 0}
   _skullText: {fileID: 0}
   _rubyText: {fileID: 0}
+  _menuItemCollecter: {fileID: 0}
   GameOverScreen: {fileID: 0}
+  skull: 0
+  ruby: 0
+  chest: 0
   thrust: 1
   OnBegin:
     m_PersistentCalls:

@@ -26,9 +26,6 @@ public class PlayerController : MonoBehaviour
     private int _maxHealth = 100;
 
     [SerializeField]
-    private int _currentHealth;
-
-    [SerializeField]
     private PlayerHealthBar _playerHealthBar;
 
     [SerializeField]
@@ -38,14 +35,20 @@ public class PlayerController : MonoBehaviour
     private TextMeshProUGUI _rubyText;
 
     [SerializeField]
+    private ItemCollectorMenu _menuItemCollecter;
+
+    [SerializeField]
     private GameOverScreen GameOverScreen;
 
     private float _movement;
     private bool _attack;
     private bool _grounded = false;
 
+    private int _currentHealth;
+
     public int skull = 0;
     public int ruby = 0;
+    public bool chest = false;
 
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -65,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
         AttackRaycast();    
 
         var move = _movement * _speed;
@@ -156,6 +158,15 @@ public class PlayerController : MonoBehaviour
         TakeDamage(20, null);
     }
 
+    void OnOpenChest(InputValue value)
+    {
+        if (chest)
+        {
+            Time.timeScale = 0;
+            _menuItemCollecter.PopUp();
+        }
+    }
+
     #endregion
 
     #region Helper Method
@@ -167,7 +178,10 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    // Collision with other game object
+    /// <summary>
+    /// Collision with other game object
+    /// </summary>
+    /// <param name="other"></param>
     void OnCollisionEnter2D(Collision2D other)
     {
 
@@ -199,7 +213,6 @@ public class PlayerController : MonoBehaviour
             skull++;
             _skullText.text = " " + skull;
         }
-
     }
 
     #region Raycast

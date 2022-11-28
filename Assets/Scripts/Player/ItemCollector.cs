@@ -5,18 +5,21 @@ using TMPro;
 
 public class ItemCollector : MonoBehaviour
 {
-    [SerializeField]
-    private ItemCollectorMenu _itemCollector;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-    var player = collision.GetComponent <PlayerController> ();
-        if (player !=null) 
+        var player = collision.GetComponent<PlayerController>();
+        if (player != null)
         {
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                _itemCollector.PopUp();
-            }
+            player.chest = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        var player = collision.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            player.chest = false;
         }
     }
 }

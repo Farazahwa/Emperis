@@ -24,12 +24,13 @@ public class ItemCollectorMenu : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    private void Cancel()
+    public void Cancel()
     {
         gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
-    private void Collect()
+    public void Collect()
     {
         if (_player.ruby >= 10 & _player.skull >= 10)
         {
@@ -40,5 +41,6 @@ public class ItemCollectorMenu : MonoBehaviour
         else {
             return;
         }
+        Time.timeScale = 1;
     }
 }
