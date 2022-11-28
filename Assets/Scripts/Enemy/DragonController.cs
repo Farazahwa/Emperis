@@ -8,7 +8,7 @@ public class DragonController : Enemy
     private GameObject _dragonBreath;
 
     [SerializeField]
-    private GameObject _fireRain;
+    private FirerainController _fireRain;
 
     [SerializeField]
     private Transform _dragonBreathSpawner;
@@ -85,7 +85,8 @@ public class DragonController : Enemy
         {
             yield return new WaitForSeconds(0.2f);
             var x = Random.Range(-10f, 11f);
-            Instantiate(_fireRain, new Vector2(_fireRainSpawner.position.x + x, _fireRainSpawner.position.y), Quaternion.identity);
+            var firerain = Instantiate(_fireRain, new Vector2(transform.position.x + x, transform.position.y), Quaternion.identity);
+            firerain.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
         }
     }
 }
