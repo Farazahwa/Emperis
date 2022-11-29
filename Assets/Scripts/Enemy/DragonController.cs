@@ -85,7 +85,7 @@ public class DragonController : Enemy
         {
             yield return new WaitForSeconds(0.2f);
             var x = Random.Range(-10f, 11f);
-            var firerain = Instantiate(_fireRain, new Vector2(transform.position.x + x, transform.position.y), Quaternion.identity);
+            var firerain = Instantiate(_fireRain, new Vector2(_fireRainSpawner.position.x + x, _fireRainSpawner.position.y), Quaternion.identity);
             firerain.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
         }
     }

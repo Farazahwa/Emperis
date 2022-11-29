@@ -44,7 +44,7 @@ public class DragonBreathController : MonoBehaviour
 
     private void Falling()
     {
-        _rigidbody.velocity -= new Vector2(-1, -1);
+        _rigidbody.velocity -= new Vector2(1, 1);
         if (transform.position == _targetPosition)
         {
             Destroy(this.gameObject);
