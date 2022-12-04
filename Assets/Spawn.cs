@@ -7,9 +7,22 @@ public class Spawn : MonoBehaviour
     [SerializeField]
     private FirerainController _fireRain;
 
+    [SerializeField]
+    private DragonBreathController _dragonBreath;
+
     void Start()
     {
-        StartCoroutine(FireRain());
+        StartCoroutine(DragonBreath());
+    }
+
+    IEnumerator DragonBreath()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5f);
+            var dragonBreath = Instantiate(_dragonBreath, transform.position, Quaternion.identity);
+            dragonBreath.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
+        }
     }
 
     IEnumerator FireRain()
