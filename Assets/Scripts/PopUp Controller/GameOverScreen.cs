@@ -21,6 +21,7 @@ public class GameOverScreen : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene("Game Scene");
+        SceneManager.LoadScene("Cave Scene");
+        Time.timeScale = 1;
     }
 }
