@@ -5,8 +5,13 @@ using TMPro;
 
 public class ItemCollector : MonoBehaviour
 {
+    [SerializeField]
+    private TextMeshProUGUI _annoucement;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
+        _annoucement.gameObject.SetActive(true);
+
         var player = collision.GetComponent<PlayerController>();
         if (player != null)
         {
@@ -16,6 +21,8 @@ public class ItemCollector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        _annoucement.gameObject.SetActive(false);
+
         var player = collision.GetComponent<PlayerController>();
         if (player != null)
         {
