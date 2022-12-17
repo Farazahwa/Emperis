@@ -16,10 +16,20 @@ public class DragonController : Enemy
     [SerializeField]
     private Transform _fireRainSpawner;
 
+    [SerializeField]
+    private int _maxHealth = 100;
+
+    [SerializeField]
+    private PlayerHealthBar _dragonHealthBar;
+
+    private int _currentHealth;
+
     private void Start()
     {
         _state = State.Wait;
         _attackTime = _attackDelay;
+        _currentHealth = _maxHealth;
+        _dragonHealthBar.setMaxHealth(_maxHealth);
     }
 
     void Update()
@@ -97,5 +107,13 @@ public class DragonController : Enemy
         _rb.velocity = new Vector2(_rb.velocity.x, 2);
     }
 
-    
+    public void TakeDamage(int damage)
+    {
+ 
+        _currentHealth -= damage;
+        _dragonHealthBar.setHealth(_currentHealth);
+
+    }
+
+
 }
