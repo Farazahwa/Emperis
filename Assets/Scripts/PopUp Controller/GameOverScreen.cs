@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _targetScene;
     public void setup()
     {
         gameObject.SetActive(true);
@@ -21,7 +23,20 @@ public class GameOverScreen : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene("Cave Scene");
+        if (_targetScene.tag == "Forest Scene")
+        {
+            SceneManager.LoadScene("Game Sceme");
+        }
+
+        if (_targetScene.tag == "Cave Scene")
+        {
+            SceneManager.LoadScene("Cave Scene");
+        }
+        
+        if (_targetScene.tag == "Hell Scene")
+        {
+            SceneManager.LoadScene("Hell Scene");
+        }
         Time.timeScale = 1;
     }
 }

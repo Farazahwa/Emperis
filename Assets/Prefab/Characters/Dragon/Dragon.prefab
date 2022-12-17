@@ -178,7 +178,7 @@ MonoBehaviour:
   _waitingDelay: 2
   _attackDelay: 3
   damage: 0
-  _dragonBreath: {fileID: 8429171473804748845, guid: c624a47532a1d3e4bb028794043b30b4, type: 3}
-  _fireRain: {fileID: 0}
+  _dragonBreath: {fileID: 3950344409181802368, guid: 32d6a0a7aaab7454e89e3eb512ecb81a, type: 3}
+  _fireRain: {fileID: 426861641901592893, guid: fb3a16d5684a84343ab0af00dbd5bc36, type: 3}
   _dragonBreathSpawner: {fileID: 0}
   _fireRainSpawner: {fileID: 0}

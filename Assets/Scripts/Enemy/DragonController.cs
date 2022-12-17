@@ -5,7 +5,7 @@ using UnityEngine;
 public class DragonController : Enemy
 {
     [SerializeField]
-    private GameObject _dragonBreath;
+    private DragonBreathController _dragonBreath;
 
     [SerializeField]
     private FirerainController _fireRain;
@@ -57,7 +57,7 @@ public class DragonController : Enemy
         {
             var random = Random.Range(0, 11);
             Debug.Log(random);
-            if (random == 10)
+            if (random > 9)
             {
                 ShootDragonBreath();
             }
@@ -66,7 +66,6 @@ public class DragonController : Enemy
                 StartCoroutine(FireRain());
             }
         }
-
         _attackDelay -= Time.deltaTime;
         if (_attackDelay <= 0)
         {
@@ -76,11 +75,14 @@ public class DragonController : Enemy
 
     private void ShootDragonBreath()
     {
-        Instantiate(_dragonBreath, _dragonBreathSpawner.position, Quaternion.identity);
+        _anim.SetTrigger("Attack");
+        var dragonBreath = Instantiate(_dragonBreath, _dragonBreathSpawner.position, Quaternion.identity);
+        dragonBreath.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
     }
 
     IEnumerator FireRain()
     {
+        _anim.SetTrigger("Attack");
         for (int i = 0; i < 15; i++)
         {
             yield return new WaitForSeconds(0.2f);
@@ -89,4 +91,11 @@ public class DragonController : Enemy
             firerain.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
         }
     }
+
+    private void Fly()
+    {
+        _rb.velocity = new Vector2(_rb.velocity.x, 2);
+    }
+
+    
 }

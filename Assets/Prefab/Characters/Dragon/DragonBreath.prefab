@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3950344409181802368}
   m_Layer: 0
   m_Name: DragonBreath
-  m_TagString: Untagged
+  m_TagString: DragonBreath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 1272699227, guid: 9a5ca667ae7f0d14e8eb39617fb63a23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

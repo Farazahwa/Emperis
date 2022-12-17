@@ -12,6 +12,15 @@ public class FirerainController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var player = collision.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            player.TakeDamage(2, null);
+        }
+    }
+
     /// <summary>
     /// Changes animation from animation firerain_show to animation firerain_shoot
     /// </summary>

@@ -48,7 +48,21 @@ public class DragonBreathController : MonoBehaviour
         _rigidbody.velocity -= new Vector2(Time.deltaTime +0.1f, Time.deltaTime);
         if (transform.position == _targetPosition)
         {
-            Destroy(this.gameObject);
+            _state = State.Explode;
+        }
+    }
+
+    private void Explode()
+    {
+        Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var player = collision.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            player.TakeDamage(30, null);
         }
     }
 

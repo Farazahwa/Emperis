@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] 
     private float _jump = 10f;
 
+    [SerializeField]
+    private float _gameOverDelay = 3f;
+
     [SerializeField] 
     private float _attackRange;
 
@@ -107,14 +110,20 @@ public class PlayerController : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _animator.SetTrigger("Die");
-            Time.timeScale = 0;
-            GameOver();
         }
 
     }
 
     public void GameOver()
     {
+        Destroy(this.gameObject);
+
+        var i = _gameOverDelay;
+        while (i > 0)
+        {
+            i -= Time.deltaTime;
+        }
+
         GameOverScreen.setup();
     }
 

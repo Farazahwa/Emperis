@@ -306,6 +306,12 @@ public class Enemy : MonoBehaviour
     
     protected void Knockback()
     {
+        Debug.Log(_player.position);
+        if (_player.position == null)
+        {
+            return;
+        }
+
         if (_player.position.x > transform.position.x)
         {
             _rb.AddForce(transform.right * -25f, ForceMode2D.Impulse);
