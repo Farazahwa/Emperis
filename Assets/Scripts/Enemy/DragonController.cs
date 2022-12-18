@@ -74,7 +74,7 @@ public class DragonController : Enemy
         {
             var random = Random.Range(0, 11);
             Debug.Log(random);
-            if (random > 9)
+            if (random > 7)
             {
                 ShootDragonBreath();
             }
@@ -109,27 +109,23 @@ public class DragonController : Enemy
         }
     }
 
-    private void Fly()
-    {
-        _rb.velocity = new Vector2(_rb.velocity.x, 2);
-    }
-
     public void TakeDamage(int damage)
     {
         if (_currentHealth <= 0)
         {
             _anim.SetTrigger("Die");
-            var delay = 1f;
-            delay -= Time.deltaTime;
-            if (delay <= 0)
-            {
-                Destroy(this.gameObject);
-            }
             return;
         }
 
         _currentHealth -= damage;
         _dragonHealthBar.setHealth(_currentHealth);
+    }
+
+    protected override void Death()
+    {
+        Destroy(this.gameObject);
+        Destroy(this);
+        Time.timeScale = 0;
     }
 
 }

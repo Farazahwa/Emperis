@@ -32,6 +32,11 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (_player == null)
+        {
+            return;
+        }
+
         _distance = Vector3.Distance(new Vector2(_player.position.x, 0), new Vector2(_groupCamera.position.x, 0));
         switch (_camera)
         {
