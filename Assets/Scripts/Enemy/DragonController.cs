@@ -74,7 +74,7 @@ public class DragonController : Enemy
         {
             var random = Random.Range(0, 11);
             Debug.Log(random);
-            if (random > 7)
+            if (random > 9)
             {
                 ShootDragonBreath();
             }
