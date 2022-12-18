@@ -20,7 +20,7 @@ public class DragonController : Enemy
     private int _maxHealth = 100;
 
     [SerializeField]
-    private PlayerHealthBar _dragonHealthBar;
+    private DragonHealthBar _dragonHealthBar;
 
     private int _currentHealth;
 
@@ -63,6 +63,13 @@ public class DragonController : Enemy
 
     protected override void Attack()
     {
+        _attackDelay -= Time.deltaTime;
+
+        if (_attackDelay <= 0)
+        {
+            _attackDelay = _attackTime;
+        }
+
         if (_attackDelay == _attackTime)
         {
             var random = Random.Range(0, 11);
@@ -76,7 +83,7 @@ public class DragonController : Enemy
                 StartCoroutine(FireRain());
             }
         }
-        _attackDelay -= Time.deltaTime;
+        
         if (_attackDelay <= 0)
         {
             _attackDelay = _attackTime;
@@ -109,11 +116,20 @@ public class DragonController : Enemy
 
     public void TakeDamage(int damage)
     {
- 
+        if (_currentHealth <= 0)
+        {
+            _anim.SetTrigger("Die");
+            var delay = 1f;
+            delay -= Time.deltaTime;
+            if (delay <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+            return;
+        }
+
         _currentHealth -= damage;
         _dragonHealthBar.setHealth(_currentHealth);
-
     }
-
 
 }

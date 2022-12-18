@@ -261,6 +261,10 @@ public class PlayerController : MonoBehaviour
                         var witch = enemy.GetComponent<WitchController>();
                         witch.Hitted();
                         break;
+                    case "Dragon":
+                        var dragon = enemy.GetComponent<DragonController>();
+                        dragon.TakeDamage(10);
+                        break;
                     default:
                         break;
                 }

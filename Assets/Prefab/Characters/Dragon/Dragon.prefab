@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1547249675614981287}
   m_Layer: 6
   m_Name: Dragon
-  m_TagString: Untagged
+  m_TagString: Dragon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,3 +182,5 @@ MonoBehaviour:
   _fireRain: {fileID: 426861641901592893, guid: fb3a16d5684a84343ab0af00dbd5bc36, type: 3}
   _dragonBreathSpawner: {fileID: 0}
   _fireRainSpawner: {fileID: 0}
+  _maxHealth: 100
+  _dragonHealthBar: {fileID: 0}
