@@ -20,7 +20,7 @@ public class DragonController : Enemy
     private int _maxHealth = 100;
 
     [SerializeField]
-    private PlayerHealthBar _dragonHealthBar;
+    private DragonHealthBar _dragonHealthBar;
 
     private int _currentHealth;
 
@@ -63,6 +63,13 @@ public class DragonController : Enemy
 
     protected override void Attack()
     {
+        _attackDelay -= Time.deltaTime;
+
+        if (_attackDelay <= 0)
+        {
+            _attackDelay = _attackTime;
+        }
+
         if (_attackDelay == _attackTime)
         {
             var random = Random.Range(0, 11);
@@ -76,7 +83,7 @@ public class DragonController : Enemy
                 StartCoroutine(FireRain());
             }
         }
-        _attackDelay -= Time.deltaTime;
+        
         if (_attackDelay <= 0)
         {
             _attackDelay = _attackTime;
@@ -102,18 +109,23 @@ public class DragonController : Enemy
         }
     }
 
-    private void Fly()
-    {
-        _rb.velocity = new Vector2(_rb.velocity.x, 2);
-    }
-
     public void TakeDamage(int damage)
     {
- 
+        if (_currentHealth <= 0)
+        {
+            _anim.SetTrigger("Die");
+            return;
+        }
+
         _currentHealth -= damage;
         _dragonHealthBar.setHealth(_currentHealth);
-
     }
 
+    protected override void Death()
+    {
+        Destroy(this.gameObject);
+        Destroy(this);
+        Time.timeScale = 0;
+    }
 
 }

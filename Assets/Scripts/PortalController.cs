@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _targetScene;
    void OnTriggerEnter2D(Collider2D col)
    {
       Debug.Log("OnTriggerEnter");
@@ -16,7 +18,18 @@ public class PortalController : MonoBehaviour
 
    private void CompleteLevel()
    {
-    SceneManager.LoadScene("Cave Scene");
-    Time.timeScale = 1;
+        switch (_targetScene.tag) 
+        {
+            case "Forest Scene":
+                SceneManager.LoadScene("Cave Scene");
+                Time.timeScale = 1;
+                break;
+            case "Cave Scene":
+                SceneManager.LoadScene("Hell Scene");
+                Time.timeScale = 1;
+                break;
+        }
+
+    
    }
 }

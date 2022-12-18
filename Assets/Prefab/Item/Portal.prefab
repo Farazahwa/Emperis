@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2298650358272855081}
   - component: {fileID: 2918786094116213005}
-  - component: {fileID: 7782641106428172830}
   - component: {fileID: 7423244316858911846}
   - component: {fileID: 6763892914410006299}
   m_Layer: 0
@@ -87,26 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7782641106428172830
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655532222948286350}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7bf662707f2d3ed4b9cc1c2cd9ef17d3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7423244316858911846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1909b2f9d49a4ac4589f0f8243c34257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetScene: {fileID: 0}
 --- !u!70 &6763892914410006299
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

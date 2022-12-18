@@ -19,6 +19,7 @@ TagManager:
   - Forest Scene
   - Cave Scene
   - Hell Scene
+  - Dragon
   layers:
   - Default
   - TransparentFX
