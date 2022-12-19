@@ -21,12 +21,14 @@ public class DragonBreathController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        
     }
 
     void Start()
     {
         _state = State.Falling;
         _targetPosition = transform.position - new Vector3(10f, 10f);
+        Debug.Log(transform.position + "," + _targetPosition);
     }
 
     // Update is called once per frame
@@ -44,8 +46,7 @@ public class DragonBreathController : MonoBehaviour
 
     private void Falling()
     {
-        Debug.Log(Time.deltaTime);
-        _rigidbody.velocity -= new Vector2(Time.deltaTime +0.1f, Time.deltaTime);
+        _rigidbody.velocity -= new Vector2(0.2f, 0.1f);
         if (transform.position == _targetPosition)
         {
             _state = State.Explode;

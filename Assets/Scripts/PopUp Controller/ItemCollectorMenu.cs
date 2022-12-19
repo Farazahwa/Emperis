@@ -22,6 +22,7 @@ public class ItemCollectorMenu : MonoBehaviour
         _rubyText.text = $"{_player.ruby}/10";
         _skullText.text = $"{_player.skull}/10";
         gameObject.SetActive(true);
+        
     }
 
     public void Cancel()
@@ -37,6 +38,7 @@ public class ItemCollectorMenu : MonoBehaviour
             _player.ruby = 0;
             _player.skull = 0;
             _portal.SetActive(true);
+            gameObject.SetActive(false);
         }
         else {
             return;

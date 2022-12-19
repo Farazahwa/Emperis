@@ -306,7 +306,7 @@ public class Enemy : MonoBehaviour
     
     protected void Knockback()
     {
-        Debug.Log(_player.position);
+        
         if (_player.position == null)
         {
             return;
